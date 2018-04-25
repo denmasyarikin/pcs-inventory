@@ -15,8 +15,8 @@ class GoodCategory extends Migration
             $table->increments('id');
             $table->string('name', 50);
             $table->text('description');
-            $table->text('image');
-            $table->integer('parent_id')->unsigned();
+            $table->text('image')->nullable()->default(null);
+            $table->integer('parent_id')->unsigned()->nullable()->default(null);
             $table->timestamps();
             $table->softDeletes();
 

@@ -16,9 +16,9 @@ class GoodPrice extends Migration
             $table->increments('id');
             $table->integer('good_variant_id')->nullable()->default(null)->unsigned();
             $table->integer('unit_id')->unsigned();
-            $table->integer('chanel_id')->nullable()->default(null)->unsigned();
+            $table->integer('chanel_id')->nullable()->default(null)->unsigned()->comment('where chanel_id is null that mean is base price');
             $table->bigInteger('price');
-            $table->boolean('current');
+            $table->boolean('current')->default(true);
             $table->timestamps();
             $table->softDeletes();
             
