@@ -14,7 +14,6 @@ class GoodCategory extends Migration
         Schema::create('inventory_good_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);
-            $table->text('description');
             $table->text('image')->nullable()->default(null);
             $table->integer('parent_id')->unsigned()->nullable()->default(null);
             $table->timestamps();

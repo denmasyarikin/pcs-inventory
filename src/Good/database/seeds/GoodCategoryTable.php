@@ -15,7 +15,6 @@ class GoodCategoryTable extends Seeder
         GoodCategory::create([
             'id' => 1,
             'name' => 'Kertas',
-            'description' => 'Untuk keperluan bisnis perkantoran atau lainnya',
             'image' => null,
             'parent_id' => null,
         ]);
@@ -23,7 +22,6 @@ class GoodCategoryTable extends Seeder
         GoodCategory::create([
             'id' => 2,
             'name' => 'Blanko Undangan',
-            'description' => 'Untuk keperluan bisnis perkantoran atau lainnya',
             'image' => null,
             'parent_id' => null,
         ]);
