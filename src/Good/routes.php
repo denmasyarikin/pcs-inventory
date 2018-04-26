@@ -4,6 +4,7 @@ $router->get('/category', ['as' => 'inventory.good.category.list', 'uses' => 'Go
 $router->get('/', ['as' => 'inventory.good.list', 'uses' => 'GoodController@getList']);
 $router->get('/{id}/attribute', ['as' => 'inventory.good.attribute.list', 'uses' => 'GoodAttributeController@getList']);
 $router->get('/{id}/option', ['as' => 'inventory.good.option.list', 'uses' => 'GoodOptionController@getList']);
+$router->get('/{id}/media', ['as' => 'inventory.good.media.list', 'uses' => 'GoodMediaController@getList']);
 
 $router->group(['middleware' => 'manage:inventory,good,write'], function ($router) {
     $router->post('category', ['as' => 'inventory.good.category.create', 'uses' => 'GoodCategoryController@createCategory']);
@@ -21,4 +22,11 @@ $router->group(['middleware' => 'manage:inventory,good,write'], function ($route
 	$router->post('/{id}/option', ['as' => 'inventory.good.option.create', 'uses' => 'GoodOptionController@createOption']);
 	$router->put('/{id}/option/{option_id}', ['as' => 'inventory.good.option.update', 'uses' => 'GoodOptionController@updateOption']);
 	$router->delete('/{id}/option/{option_id}', ['as' => 'inventory.good.option.delete', 'uses' => 'GoodOptionController@deleteOption']);
+
+    $router->group(['prefix' => '/{id}/media'], function ($router) {
+        $router->post('/', ['as' => 'inventory.good.media.create', 'uses' => 'GoodMediaController@createMedia']);
+        $router->put('/{media_id}', ['as' => 'inventory.good.media.update', 'uses' => 'GoodMediaController@updateMedia']);
+        $router->put('/{media_id}/primary', ['as' => 'inventory.good.media.update_primary', 'uses' => 'GoodMediaController@updateMediaPrimary']);
+        $router->delete('/{media_id}', ['as' => 'inventory.good.media.delete', 'uses' => 'GoodMediaController@deleteMedia']);
+    });
 });
