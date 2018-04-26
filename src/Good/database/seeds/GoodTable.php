@@ -17,7 +17,7 @@ class GoodTable extends Seeder
             'name' => 'HVS',
             'description' => 'Kertas Untuk keperluan bisnis perkantoran atau lainnya',
             'good_category_id' => 1,
-            'enabled' => true
+            'status' => 'active'
         ]);
 
         Good::create([
@@ -25,7 +25,7 @@ class GoodTable extends Seeder
             'name' => 'Karton',
             'description' => 'Kertas untuk mencetak dan lain lain',
             'good_category_id' => 1,
-            'enabled' => true
+            'status' => 'active'
         ]);
 
         Good::create([
@@ -33,7 +33,7 @@ class GoodTable extends Seeder
             'name' => 'Era Baru',
             'description' => 'Blanko udangan untuk pernikahan dan lain nya',
             'good_category_id' => 2,
-            'enabled' => true
+            'status' => 'active'
         ]);
 
         Good::create([
@@ -41,7 +41,7 @@ class GoodTable extends Seeder
             'name' => 'Pelastik Undangan',
             'description' => 'Plastik untuk undangan blanko atau undagnan cetak',
             'good_category_id' => null,
-            'enabled' => true
+            'status' => 'active'
         ]);
     }
 }

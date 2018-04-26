@@ -37,6 +37,6 @@ class GoodOption extends Model
      */
     public function variants()
     {
-    	return $this->belongsToMany(GoodVariant::class, 'inventory_good_variant_options');
+    	return $this->belongsToMany(GoodVariant::class, 'inventory_good_variant_options')->withTimestamps();
     }
 }

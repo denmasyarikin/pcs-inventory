@@ -15,8 +15,8 @@ class CreateGoodCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:20',
-            'image' => '',
-            'parent_id' => 'numeric|exists:inventory_good_categories,id',
+            'image' => 'nullable',
+            'parent_id' => 'nullable|numeric|exists:inventory_good_categories,id',
         ];
     }
 }

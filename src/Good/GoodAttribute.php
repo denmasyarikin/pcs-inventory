@@ -23,4 +23,35 @@ class GoodAttribute extends Model
     {
     	return $this->belongsTo(Good::class);
     }
+
+    /**
+     * Get Value.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getValueAttribute($value)
+    {
+        switch ($this->type) {
+            case 'integer':
+                return (int) $value;
+                break;
+            
+            case 'boolean':
+                return (bool) $value;
+                break;
+            
+            case 'array':
+                return json_decode($value);
+                break;
+            
+            case 'object':
+                return unserialize($value);
+                break;
+            
+            default:
+                return $value;
+                break;
+        }
+    }
 }

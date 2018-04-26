@@ -14,9 +14,9 @@ class Good extends Migration
         Schema::create('inventory_goods', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
-            $table->text('description');
+            $table->text('description')->nullable()->default(null);
             $table->integer('good_category_id')->nullable()->default(null)->unsigned();
-            $table->boolean('enabled')->default(true);
+            $table->enum('status', ['draft', 'active', 'inactive'])->default('draft');
             $table->timestamps();
             $table->softDeletes();
             

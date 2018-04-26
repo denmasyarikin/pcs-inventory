@@ -17,9 +17,9 @@ class Good extends Model
     protected $table = 'inventory_goods';
 
     /**
-     * Get the category record associated with the Good.
+     * Get the goodCategory record associated with the Good.
      */
-    public function category()
+    public function goodCategory()
     {
     	return $this->belongsTo(GoodCategory::class);
     }

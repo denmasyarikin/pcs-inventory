@@ -5,7 +5,7 @@ namespace Denmasyarikin\Inventory\Good\Transformers;
 use App\Http\Transformers\Detail;
 use Illuminate\Database\Eloquent\Model;
 
-class GoodCategoryDetailTransformer extends Detail
+class GoodDetailTransformer extends Detail
 {
     /**
      * get data.
@@ -19,8 +19,10 @@ class GoodCategoryDetailTransformer extends Detail
         return [
             'id' => $model->id,
             'name' => $model->name,
-            'image' => $model->image,
-            'parent_id' => (int) $model->parent_id,
+            'description' => $model->description,
+            'good_category' => (new GoodCategoryDetailTransformer($model->goodCategory))->toArray(),
+            'good_category_id' => $model->good_category_id,
+            'status' => $model->status,
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $model->updated_at->format('Y-m-d H:i:s')
         ];

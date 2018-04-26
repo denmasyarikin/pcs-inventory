@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Denmasyarikin\Inventory\Good\GoodCategory;
 use Denmasyarikin\Inventory\Good\Requests\CreateGoodCategoryRequest;
 use Denmasyarikin\Inventory\Good\Requests\UpdateGoodCategoryRequest;
-use Denmasyarikin\Inventory\Good\Requests\DetailGoodCategoryRequest;
+use Denmasyarikin\Inventory\Good\Requests\DeleteGoodCategoryRequest;
 use Denmasyarikin\Inventory\Good\Transformers\GoodCategoryListTransformer;
 use Denmasyarikin\Inventory\Good\Transformers\GoodCategoryDetailTransformer;
 
@@ -23,9 +23,9 @@ class GoodCategoryController extends Controller
      */
     public function getList(Request $request)
     {
-        $banks = $this->getGoodCategoryList($request);
+        $categories = $this->getGoodCategoryList($request);
 
-        $transform = new GoodCategoryListTransformer($banks);
+        $transform = new GoodCategoryListTransformer($categories);
 
         return new JsonResponse(['data' => $transform->toArray()]);
     }
@@ -39,14 +39,14 @@ class GoodCategoryController extends Controller
      */
     protected function getGoodCategoryList(Request $request)
     {
-        $banks = GoodCategory::orderBy('name', 'ASC');
+        $categories = GoodCategory::orderBy('name', 'ASC');
 
         if ($request->has('key')) {
-            $banks->where('id', $request->key);
-            $banks->orwhere('name', 'like', "%{$request->key}%");
+            $categories->where('id', $request->key);
+            $categories->orwhere('name', 'like', "%{$request->key}%");
         }
 
-        return $banks->get();
+        return $categories->get();
     }
 
     /**
@@ -89,7 +89,7 @@ class GoodCategoryController extends Controller
      *
      * @return json
      */
-    public function deleteCategory(DetailGoodCategoryRequest $request)
+    public function deleteCategory(DeleteGoodCategoryRequest $request)
     {
         $productCategory = $request->getGoodCategory();
 

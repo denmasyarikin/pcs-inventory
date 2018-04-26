@@ -21,9 +21,9 @@ class GoodVariantTable extends Seeder
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
-            ['good_variant_id' => 1, 'good_option_item_id' => 1], // merk sidu
-            ['good_variant_id' => 1, 'good_option_item_id' => 6], // A4
-            ['good_variant_id' => 1, 'good_option_item_id' => 10], // 70 gsm
+            ['good_variant_id' => 1, 'good_option_item_id' => 1, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // merk sidu
+            ['good_variant_id' => 1, 'good_option_item_id' => 6, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // A4
+            ['good_variant_id' => 1, 'good_option_item_id' => 10, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // 70 gsm
         ]);
 
         GoodVariant::create([
@@ -33,9 +33,9 @@ class GoodVariantTable extends Seeder
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
-            ['good_variant_id' => 2, 'good_option_item_id' => 1], // merk sidu
-            ['good_variant_id' => 2, 'good_option_item_id' => 6], // A4
-            ['good_variant_id' => 2, 'good_option_item_id' => 11], // 80 gsm
+            ['good_variant_id' => 2, 'good_option_item_id' => 1, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // merk sidu
+            ['good_variant_id' => 2, 'good_option_item_id' => 6, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // A4
+            ['good_variant_id' => 2, 'good_option_item_id' => 11, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // 80 gsm
         ]);
 
         GoodVariant::create([
@@ -45,9 +45,9 @@ class GoodVariantTable extends Seeder
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
-            ['good_variant_id' => 3, 'good_option_item_id' => 1], // merk sidu
-            ['good_variant_id' => 3, 'good_option_item_id' => 8], // F4
-            ['good_variant_id' => 3, 'good_option_item_id' => 10], // 70 gsm
+            ['good_variant_id' => 3, 'good_option_item_id' => 1, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // merk sidu
+            ['good_variant_id' => 3, 'good_option_item_id' => 8, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // F4
+            ['good_variant_id' => 3, 'good_option_item_id' => 10, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // 70 gsm
         ]);
 
         GoodVariant::create([
@@ -57,9 +57,9 @@ class GoodVariantTable extends Seeder
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
-            ['good_variant_id' => 4, 'good_option_item_id' => 1], // merk sidu
-            ['good_variant_id' => 4, 'good_option_item_id' => 8], // F4
-            ['good_variant_id' => 4, 'good_option_item_id' => 11], // 80 gsm
+            ['good_variant_id' => 4, 'good_option_item_id' => 1, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // merk sidu
+            ['good_variant_id' => 4, 'good_option_item_id' => 8, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // F4
+            ['good_variant_id' => 4, 'good_option_item_id' => 11, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // 80 gsm
         ]);
 
         GoodVariant::create([
@@ -69,9 +69,9 @@ class GoodVariantTable extends Seeder
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
-            ['good_variant_id' => 5, 'good_option_item_id' => 1], // merk sidu
-            ['good_variant_id' => 5, 'good_option_item_id' => 9], // F4
-            ['good_variant_id' => 5, 'good_option_item_id' => 10], // 70 gsm
+            ['good_variant_id' => 5, 'good_option_item_id' => 1, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // merk sidu
+            ['good_variant_id' => 5, 'good_option_item_id' => 9, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // F4
+            ['good_variant_id' => 5, 'good_option_item_id' => 10, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // 70 gsm
         ]);
 
         GoodVariant::create([
@@ -81,12 +81,10 @@ class GoodVariantTable extends Seeder
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
-            ['good_variant_id' => 6, 'good_option_item_id' => 1], // merk sidu
-            ['good_variant_id' => 6, 'good_option_item_id' => 9], // F4
-            ['good_variant_id' => 6, 'good_option_item_id' => 11], // 80 gsm
+            ['good_variant_id' => 6, 'good_option_item_id' => 1, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // merk sidu
+            ['good_variant_id' => 6, 'good_option_item_id' => 9, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // F4
+            ['good_variant_id' => 6, 'good_option_item_id' => 11, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // 80 gsm
         ]);
-
-        //============= PAPERONE
 
         GoodVariant::create([
 			'id' => 7,
@@ -95,9 +93,9 @@ class GoodVariantTable extends Seeder
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
-        	['good_variant_id' => 7, 'good_option_item_id' => 2], // merk paper one
-        	['good_variant_id' => 7, 'good_option_item_id' => 6], // A4
-        	['good_variant_id' => 7, 'good_option_item_id' => 10], // 70 gsm
+        	['good_variant_id' => 7, 'good_option_item_id' => 2, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // merk paper one
+        	['good_variant_id' => 7, 'good_option_item_id' => 6, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // A4
+        	['good_variant_id' => 7, 'good_option_item_id' => 10, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // 70 gsm
         ]);
 
         GoodVariant::create([
@@ -107,9 +105,9 @@ class GoodVariantTable extends Seeder
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
-        	['good_variant_id' => 8, 'good_option_item_id' => 2], // merk paper one
-        	['good_variant_id' => 8, 'good_option_item_id' => 6], // A4
-        	['good_variant_id' => 8, 'good_option_item_id' => 11], // 80 gsm
+        	['good_variant_id' => 8, 'good_option_item_id' => 2, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // merk paper one
+        	['good_variant_id' => 8, 'good_option_item_id' => 6, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // A4
+        	['good_variant_id' => 8, 'good_option_item_id' => 11, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // 80 gsm
         ]);
 
         GoodVariant::create([
@@ -119,9 +117,9 @@ class GoodVariantTable extends Seeder
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
-        	['good_variant_id' => 9, 'good_option_item_id' => 2], // merk paper one
-        	['good_variant_id' => 9, 'good_option_item_id' => 8], // F4
-        	['good_variant_id' => 9, 'good_option_item_id' => 10], // 70 gsm
+        	['good_variant_id' => 9, 'good_option_item_id' => 2, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // merk paper one
+        	['good_variant_id' => 9, 'good_option_item_id' => 8, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // F4
+        	['good_variant_id' => 9, 'good_option_item_id' => 10, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // 70 gsm
         ]);
 
         GoodVariant::create([
@@ -131,9 +129,9 @@ class GoodVariantTable extends Seeder
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
-            ['good_variant_id' => 10, 'good_option_item_id' => 2], // merk paper one
-            ['good_variant_id' => 10, 'good_option_item_id' => 8], // F4
-            ['good_variant_id' => 10, 'good_option_item_id' => 11], // 80 gsm
+            ['good_variant_id' => 10, 'good_option_item_id' => 2, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // merk paper one
+            ['good_variant_id' => 10, 'good_option_item_id' => 8, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // F4
+            ['good_variant_id' => 10, 'good_option_item_id' => 11, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // 80 gsm
         ]);
 
         GoodVariant::create([
@@ -143,9 +141,9 @@ class GoodVariantTable extends Seeder
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
-            ['good_variant_id' => 11, 'good_option_item_id' => 2], // merk paper one
-            ['good_variant_id' => 11, 'good_option_item_id' => 9], // F4
-            ['good_variant_id' => 11, 'good_option_item_id' => 10], // 70 gsm
+            ['good_variant_id' => 11, 'good_option_item_id' => 2, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // merk paper one
+            ['good_variant_id' => 11, 'good_option_item_id' => 9, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // F4
+            ['good_variant_id' => 11, 'good_option_item_id' => 10, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // 70 gsm
         ]);
 
         GoodVariant::create([
@@ -155,9 +153,9 @@ class GoodVariantTable extends Seeder
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
-        	['good_variant_id' => 12, 'good_option_item_id' => 2], // merk sidu
-        	['good_variant_id' => 12, 'good_option_item_id' => 9], // F4
-        	['good_variant_id' => 12, 'good_option_item_id' => 11], // 80 gsm
+        	['good_variant_id' => 12, 'good_option_item_id' => 2, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // merk sidu
+        	['good_variant_id' => 12, 'good_option_item_id' => 9, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // F4
+        	['good_variant_id' => 12, 'good_option_item_id' => 11, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')], // 80 gsm
         ]);
     }
 }
