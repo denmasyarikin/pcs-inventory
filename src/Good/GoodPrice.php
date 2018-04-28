@@ -17,9 +17,9 @@ class GoodPrice extends Model
     protected $table = 'inventory_good_priceses';
 
     /**
-     * Get the variant record associated with the GoodPrice.
+     * Get the goodVariant record associated with the GoodPrice.
      */
-    public function variant()
+    public function goodVariant()
     {
     	return $this->belongsTo(GoodVariant::class);
     } 

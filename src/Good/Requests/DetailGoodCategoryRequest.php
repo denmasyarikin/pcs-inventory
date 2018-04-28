@@ -26,7 +26,7 @@ class DetailGoodCategoryRequest extends FormRequest
             return $this->goodCategory;
         }
 
-        $id = $this->route('id');
+        $id = (int) $this->route('id');
 
         if ($this->goodCategory = GoodCategory::find($id)) {
             return $this->goodCategory;

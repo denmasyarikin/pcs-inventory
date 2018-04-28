@@ -5,7 +5,7 @@ namespace Denmasyarikin\Inventory\Good\Transformers;
 use App\Http\Transformers\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class GoodOptionItemListTransformer extends Collection
+class GoodPriceListTransformer extends Collection
 {
     /**
      * get data.
@@ -14,6 +14,6 @@ class GoodOptionItemListTransformer extends Collection
      */
     protected function getData(Model $model)
     {
-        return (new GoodOptionItemDetailTransformer($model))->toArray();
+        return (new GoodPriceDetailTransformer($model))->toArray();
     }
 }

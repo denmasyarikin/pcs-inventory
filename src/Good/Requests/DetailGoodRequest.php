@@ -26,7 +26,7 @@ class DetailGoodRequest extends FormRequest
             return $this->good;
         }
 
-        $id = $this->route('id');
+        $id = (int) $this->route('id');
 
         if ($this->good = Good::find($id)) {
             return $this->good;

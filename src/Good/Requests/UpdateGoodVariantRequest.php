@@ -4,7 +4,7 @@ namespace Denmasyarikin\Inventory\Good\Requests;
 
 use Denmasyarikin\Inventory\Good\Good;
 
-class UpdateGoodAttributeRequest extends DetailGoodAttributeRequest
+class UpdateGoodVariantRequest extends DetailGoodVariantRequest
 {
     /**
      * get good.
@@ -28,9 +28,13 @@ class UpdateGoodAttributeRequest extends DetailGoodAttributeRequest
     public function rules()
     {
         return [
-            'type' => 'required',
-            'key' => 'required',
-            'value' => 'required',
+            'name' => 'required|max:30',
+            'tracked' => 'required|boolean',
+            'enabled' => 'required|boolean',
+            'on_hold' => 'nullable|integer',
+            'on_hand' => 'nullable|integer',
+            'good_option_items_id' => 'required|array:min:1',
+            'good_option_items_id' => 'exists:inventory_good_option_items,id'
         ];
     }
 }

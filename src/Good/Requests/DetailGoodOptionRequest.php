@@ -27,22 +27,12 @@ class DetailGoodOptionRequest extends DetailGoodRequest
         }
 
         $good = null === $good ? $this->getGood() : $good;
-        $id = $this->route('option_id');
+        $id = (int) $this->route('option_id');
 
         if ($this->goodOption = $good->options()->find($id)) {
             return $this->goodOption;
         }
 
         throw new NotFoundHttpException('Good Option Not Found');
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [];
     }
 }

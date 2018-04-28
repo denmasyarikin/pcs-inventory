@@ -25,9 +25,17 @@ class GoodVariant extends Model
     }
 
     /**
-     * Get the prices record associated with the GoodVariant.
+     * Get the goodOptionItems record associated with the GoodVariant.
      */
-    public function prices()
+    public function goodOptionItems()
+    {
+        return $this->belongsToMany(GoodOptionItem::class, 'inventory_good_variant_options');
+    }
+
+    /**
+     * Get the goodPrices record associated with the GoodVariant.
+     */
+    public function goodPrices()
     {
     	return $this->hasMany(GoodPrice::class);
     }

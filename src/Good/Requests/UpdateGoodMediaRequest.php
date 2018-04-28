@@ -2,8 +2,8 @@
 
 namespace Denmasyarikin\Inventory\Good\Requests;
 
-use Denmasyarikin\Inventory\Good\GoodMedia;
 use Denmasyarikin\Inventory\Good\Good;
+use Denmasyarikin\Inventory\Good\GoodMedia;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UpdateGoodMediaRequest extends DetailGoodRequest
@@ -41,7 +41,7 @@ class UpdateGoodMediaRequest extends DetailGoodRequest
         }
 
         $good = $this->getGood();
-        $id = $this->route('media_id');
+        $id = (int) $this->route('media_id');
 
         if ($this->goodMedia = $good->medias()->find($id)) {
             return $this->goodMedia;

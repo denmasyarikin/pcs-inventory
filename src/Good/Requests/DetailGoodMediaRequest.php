@@ -26,7 +26,7 @@ class DetailGoodMediaRequest extends DetailGoodRequest
         }
 
         $product = $this->getGood();
-        $id = $this->route('media_id');
+        $id = (int) $this->route('media_id');
 
         if ($this->productMedia = $product->medias()->find($id)) {
             return $this->productMedia;

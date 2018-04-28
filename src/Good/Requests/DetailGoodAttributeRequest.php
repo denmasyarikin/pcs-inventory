@@ -27,22 +27,12 @@ class DetailGoodAttributeRequest extends DetailGoodRequest
         }
 
         $good = null === $good ? $this->getGood() : $good;
-        $id = $this->route('attribute_id');
+        $id = (int) $this->route('attribute_id');
 
         if ($this->goodAttribute = $good->attributes()->find($id)) {
             return $this->goodAttribute;
         }
 
         throw new NotFoundHttpException('Good Attribute Not Found');
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [];
     }
 }
