@@ -22,6 +22,7 @@ class GoodDetailTransformer extends Detail
             'description' => $model->description,
             'good_category' => (new GoodCategoryDetailTransformer($model->goodCategory))->toArray(),
             'good_category_id' => $model->good_category_id,
+            'image' => $model->image,
             'status' => $model->status,
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $model->updated_at->format('Y-m-d H:i:s')

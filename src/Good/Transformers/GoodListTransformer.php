@@ -2,10 +2,10 @@
 
 namespace Denmasyarikin\Inventory\Good\Transformers;
 
-use App\Http\Transformers\Pagination;
+use App\Http\Transformers\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class GoodListTransformer extends Pagination
+class GoodListTransformer extends Collection
 {
     /**
      * get data.

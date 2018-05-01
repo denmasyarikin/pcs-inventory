@@ -19,6 +19,8 @@ class GoodListDetailTransformer extends Detail
         return [
             'id' => $model->id,
             'name' => $model->name,
+            'image' => $model->image,
+            'variant_count' => $model->variants->count(),
             'description' => $model->description,
             'status' => $model->status
         ];

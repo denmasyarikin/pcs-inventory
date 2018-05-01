@@ -13,7 +13,7 @@ class UpdateGoodRequest extends DetailGoodRequest
     {
         $good = parent::getGood();
 
-        $this->checkFreshData($good);
+        $this->checkFreshData($good, 'good_last_updated');
 
         return $good;
     }

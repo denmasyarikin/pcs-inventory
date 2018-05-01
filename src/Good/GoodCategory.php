@@ -17,9 +17,9 @@ class GoodCategory extends Model
     protected $table = 'inventory_good_categories';
 
     /**
-     * Get the good record associated with the GoodCategory.
+     * Get the goods record associated with the GoodCategory.
      */
-    public function good()
+    public function goods()
     {
     	return $this->hasMany(Good::class);
     }
@@ -37,6 +37,6 @@ class GoodCategory extends Model
      */
     public function children()
     {
-    	return $this->hasMany(static::class);
+    	return $this->hasMany(static::class, 'parent_id');
     }
 }

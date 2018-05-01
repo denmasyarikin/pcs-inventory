@@ -55,4 +55,24 @@ class Good extends Model
     {
     	return $this->hasMany(GoodMedia::class);
     }
+
+    /**
+     * Get Image.
+     *
+     * @return string
+     */
+    public function getImageAttribute()
+    {
+        if (0 === count($medias = $this->medias)) {
+            return null;
+        }
+
+        $primary = $medias->where('primary', true)->first();
+
+        if (is_null($primary)) {
+            $primary = $medias->first();
+        }
+
+        return $primary->content;
+    }
 }

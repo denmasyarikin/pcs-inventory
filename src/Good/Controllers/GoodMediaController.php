@@ -42,12 +42,12 @@ class GoodMediaController extends Controller
     {
         $good = $request->getGood();
 
-        if ($request->primary) {
-            $good->medias()->update(['primary' => false]);
+        if ($good->medias->count() === 0) {
+            $request->merge(['primary' => true]);
         }
 
         $media = $good->medias()->create($request->only([
-            'type', 'content', 'sequence', 'primary',
+            'type', 'content', 'sequence', 'primary'
         ]));
 
         return new JsonResponse([
@@ -69,12 +69,8 @@ class GoodMediaController extends Controller
         $good = $request->getGood();
         $media = $request->getGoodMedia();
 
-        if ($request->primary) {
-            $good->medias()->update(['primary' => false]);
-        }
-
         $media->update($request->only([
-            'type', 'content', 'sequence', 'primary',
+            'type', 'content', 'sequence',
         ]));
 
         return new JsonResponse([
@@ -120,6 +116,12 @@ class GoodMediaController extends Controller
         $good = $request->getGood();
         $media = $request->getGoodMedia();
         $media->delete();
+        $medias = $good->medias;
+
+        if ($medias->count() > 0 AND $medias->whereStrict('primary', true)->count() === 0) {
+            $media = $good->medias()->first();
+            $media->update(['primary' => true]);
+        }
 
         return new JsonResponse([
             'updated_at' => $good->updated_at->format('Y-m-d H:i:s'), 
