@@ -51,7 +51,6 @@ class GoodMediaController extends Controller
         ]));
 
         return new JsonResponse([
-            'updated_at' => $good->updated_at->format('Y-m-d H:i:s'), 
             'message' => 'Good Media has been created',
             'data' => (new GoodMediaDetailTransformer($media))->toArray(),
         ], 201);
@@ -74,7 +73,6 @@ class GoodMediaController extends Controller
         ]));
 
         return new JsonResponse([
-            'updated_at' => $good->updated_at->format('Y-m-d H:i:s'), 
             'message' => 'Good Media has been updated',
             'data' => (new GoodMediaDetailTransformer($media))->toArray(),
         ]);
@@ -98,10 +96,7 @@ class GoodMediaController extends Controller
 
         $media->update(['primary' => true]);
 
-        return new JsonResponse([
-            'updated_at' => $good->updated_at->format('Y-m-d H:i:s'),
-            'message' => 'Good Media Primary has been updated',
-        ]);
+        return new JsonResponse(['message' => 'Good Media Primary has been updated']);
     }
 
     /**
@@ -123,9 +118,6 @@ class GoodMediaController extends Controller
             $media->update(['primary' => true]);
         }
 
-        return new JsonResponse([
-            'updated_at' => $good->updated_at->format('Y-m-d H:i:s'), 
-            'message' => 'Good media has been deleted'
-        ]);
+        return new JsonResponse(['message' => 'Good media has been deleted']);
     }
 }
