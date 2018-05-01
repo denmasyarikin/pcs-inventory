@@ -2,24 +2,8 @@
 
 namespace Denmasyarikin\Inventory\Good\Requests;
 
-use Denmasyarikin\Inventory\Good\Good;
-
 class UpdateGoodVariantRequest extends DetailGoodVariantRequest
 {
-    /**
-     * get good.
-     *
-     * @return Good
-     */
-    public function getGood(): ?Good
-    {
-        $good = parent::getGood();
-
-        $this->checkFreshData($good, 'good_last_updated');
-
-        return $good;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *

@@ -2,7 +2,6 @@
 
 namespace Denmasyarikin\Inventory\Good\Requests;
 
-use Denmasyarikin\Inventory\Good\Good;
 use Denmasyarikin\Inventory\Good\GoodMedia;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -14,20 +13,6 @@ class UpdateGoodMediaRequest extends DetailGoodRequest
      * @var GoodMedia
      */
     public $goodMedia;
-
-    /**
-     * get good.
-     *
-     * @return Good
-     */
-    public function getGood(): ?Good
-    {
-        $good = parent::getGood();
-
-        $this->checkFreshData($good);
-
-        return $good;
-    }
 
     /**
      * get goodMedia.
