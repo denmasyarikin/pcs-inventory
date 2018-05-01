@@ -12,7 +12,6 @@ class UpdateGoodAttributeRequest extends DetailGoodAttributeRequest
     public function rules()
     {
         return [
-            'type' => 'required',
             'key' => 'required',
             'value' => 'required',
         ];

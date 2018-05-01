@@ -14,7 +14,6 @@ class GoodAttribute extends Migration
         Schema::create('inventory_good_attributs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('good_id')->nullable()->default(null)->unsigned();
-            $table->string('type');
             $table->string('key', 50);
             $table->text('value');
             $table->timestamps();

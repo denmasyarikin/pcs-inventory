@@ -41,7 +41,7 @@ class GoodAttributeController extends Controller
         $good = $request->getGood();
 
         $attribute = $good->attributes()->create(
-            $request->only(['type', 'key', 'value'])
+            $request->only(['key', 'value'])
         );
 
         return new JsonResponse([
@@ -61,7 +61,7 @@ class GoodAttributeController extends Controller
     {
         $attribute = $request->getGoodAttribute();
 
-        $attribute->update($request->only(['type', 'key', 'value']));
+        $attribute->update($request->only(['key', 'value']));
 
         return new JsonResponse([
             'messaage' => 'Good attribute has been updated',

@@ -18,7 +18,6 @@ class GoodAttributeDetailTransformer extends Detail
     {
         return [
             'id' => $model->id,
-            'type' => $model->type,
             'key' => $model->key,
             'value' => $model->value,
         ];
