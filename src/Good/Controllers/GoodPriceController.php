@@ -44,7 +44,7 @@ class GoodPriceController extends Controller
         $this->checkIsVariantPriceExist($goodVariant, $request->chanel_id);
 
         $price = $goodVariant->goodPrices()->create(
-            $request->only(['chanel_id', 'unit_id', 'price'])
+            $request->only(['chanel_id', 'price'])
         );
 
         return new JsonResponse([
@@ -67,7 +67,6 @@ class GoodPriceController extends Controller
 
         $variant->goodPrices()
                 ->whereChanelId($price->chanel_id)
-                ->whereUnitId($price->unit_id)
                 ->update(['current' => false]);
         
         $newPrice = $price->replicate();

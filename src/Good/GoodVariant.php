@@ -29,7 +29,7 @@ class GoodVariant extends Model
      */
     public function goodOptionItems()
     {
-        return $this->belongsToMany(GoodOptionItem::class, 'inventory_good_variant_options');
+        return $this->belongsToMany(GoodOptionItem::class, 'inventory_good_variant_options')->withTrashed();
     }
 
     /**
@@ -38,5 +38,13 @@ class GoodVariant extends Model
     public function goodPrices()
     {
     	return $this->hasMany(GoodPrice::class);
+    }
+
+    /**
+     * Get the unit record associated with the GoodPrice.
+     */
+    public function unit()
+    {
+        return $this->belongsTo('Modules\Unit\Unit');
     }
 }

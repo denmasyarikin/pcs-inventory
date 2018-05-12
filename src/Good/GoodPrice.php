@@ -31,12 +31,4 @@ class GoodPrice extends Model
     {
     	return $this->belongsTo('Modules\Chanel\Chanel');
     }
-
-    /**
-     * Get the unit record associated with the GoodPrice.
-     */
-    public function unit()
-    {
-    	return $this->belongsTo('Modules\Unit\Unit');
-    }
 }

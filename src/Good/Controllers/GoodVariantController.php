@@ -47,7 +47,7 @@ class GoodVariantController extends Controller
         $this->checkIsVariantExist($good, $goodOptionItemsId);
 
         $variant = $good->variants()->create(
-            $request->only(['name', 'tracked', 'enabled', 'on_hand', 'on_hold'])
+            $request->only(['name', 'tracked', 'on_hand', 'on_hold', 'ready_stock', 'unit_id'])
         );
 
         $variant->goodOptionItems()->sync($request->good_option_items_id);
@@ -73,7 +73,13 @@ class GoodVariantController extends Controller
 
         $this->checkIsVariantExist($good, $goodOptionItemsId, $variant);
 
-        $variant->update($request->only(['name', 'tracked', 'enabled', 'on_hand', 'on_hold']));
+        if ((bool) $request->enabled === true) {
+            if ($variant->goodPrices()->count() === 0) {
+                throw new BadRequestHttpException('Can not be enabled with no prices');
+            }
+        }
+
+        $variant->update($request->only(['name', 'tracked', 'enabled', 'on_hand', 'on_hold', 'ready_stock' ,'unit_id']));
         $variant->goodOptionItems()->sync($request->good_option_items_id);
 
         return new JsonResponse([

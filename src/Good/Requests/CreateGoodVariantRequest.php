@@ -14,10 +14,11 @@ class CreateGoodVariantRequest extends DetailGoodRequest
         return [
             'name' => 'required|max:30',
             'tracked' => 'required|boolean',
-            'enabled' => 'required|boolean',
-            'on_hold' => 'nullable|integer',
-            'on_hand' => 'nullable|integer',
-            'good_option_items_id' => 'required|array:min:1',
+            'on_hold' => 'integer',
+            'on_hand' => 'integer',
+            'ready_stock' => 'integer',
+            'unit_id' => 'required|exists:core_units,id',
+            'good_option_items_id' => 'nullable|array',
             'good_option_items_id' => 'exists:inventory_good_option_items,id'
         ];
     }

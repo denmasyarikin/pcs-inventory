@@ -4,6 +4,7 @@ namespace Denmasyarikin\Inventory\Good\Transformers;
 
 use App\Http\Transformers\Detail;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Unit\Transformers\UnitListDetailTransformer;
 
 class GoodVariantDetailTransformer extends Detail
 {
@@ -19,10 +20,16 @@ class GoodVariantDetailTransformer extends Detail
         return [
             'id' => $model->id,
             'name' => $model->name,
+            'unit_id' => $model->unit_id,
+            'unit' => (new UnitListDetailTransformer($model->unit))->toArray(),
             'tracked' => (bool) $model->tracked,
             'enabled' => (bool) $model->enabled,
             'on_hand' => (int) $model->on_hand,
             'on_hold' => (int) $model->on_hold,
+            'ready_stock' => (int) $model->ready_stock,
+            'good_option_items_id' => $model->goodOptionItems->pluck('id'),
+            'option_items' => (new GoodOptionItemListTransformer($model->goodOptionItems))->toArray(),
+            'prices' => (new GoodPriceListFormatedTransformer($model->goodPrices))->toArray(),
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $model->updated_at->format('Y-m-d H:i:s')
         ];

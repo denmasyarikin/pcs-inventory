@@ -105,13 +105,13 @@ class GoodController extends Controller
      */
     public function createGood(CreateGoodRequest $request)
     {
-        $product = Good::create($request->only([
+        $good = Good::create($request->only([
             'name', 'description', 'good_category_id'
         ]));
 
         return new JsonResponse([
             'message' => 'Good has been created',
-            'data' => (new GoodDetailTransformer($product))->toArray(),
+            'data' => (new GoodDetailTransformer($good))->toArray(),
         ], 201);
     }
 
@@ -124,13 +124,16 @@ class GoodController extends Controller
      */
     public function updateGood(UpdateGoodRequest $request)
     {
-        $product = $request->getGood();
+        $good = $request->getGood();
 
-        $product->update($request->only([
+        $good->update($request->only([
             'name', 'description', 'good_category_id', 'status'
         ]));
 
-        return new JsonResponse(['message' => 'Good has been updated']);
+        return new JsonResponse([
+            'message' => 'Good has been updated',
+            'data' => (new GoodDetailTransformer($good))->toArray(),
+        ]);
     }
 
     /**
@@ -142,9 +145,9 @@ class GoodController extends Controller
      */
     public function deleteGood(DetailGoodRequest $request)
     {
-        $product = $request->getGood();
+        $good = $request->getGood();
 
-        $product->delete();
+        $good->delete();
 
         return new JsonResponse(['message' => 'Good has been deleted']);
     }

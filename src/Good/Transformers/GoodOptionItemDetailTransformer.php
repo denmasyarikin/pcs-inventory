@@ -16,10 +16,15 @@ class GoodOptionItemDetailTransformer extends Detail
      */
     protected function getData(Model $model)
     {
+        $goodOption = $model->goodOption;
+
         return [
             'id' => $model->id,
+            'option' => [
+                'id' => $goodOption->id,
+                'name' => $goodOption->name
+            ],
             'name' => $model->name,
-            'description' => $model->description,
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $model->updated_at->format('Y-m-d H:i:s')
         ];

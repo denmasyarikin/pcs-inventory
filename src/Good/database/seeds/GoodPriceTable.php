@@ -12,17 +12,17 @@ class GoodPriceTable extends Seeder
      */
     public function run()
     {
-        GoodPrice::create(['good_variant_id' => 1, 'unit_id' => 17, 'price' => 35000]);
-        GoodPrice::create(['good_variant_id' => 2, 'unit_id' => 17, 'price' => 49000]);
-        GoodPrice::create(['good_variant_id' => 3, 'unit_id' => 17, 'price' => 30000]);
-        GoodPrice::create(['good_variant_id' => 4, 'unit_id' => 17, 'price' => 39000]);
-        GoodPrice::create(['good_variant_id' => 5, 'unit_id' => 17, 'price' => 35000]);
-        GoodPrice::create(['good_variant_id' => 6, 'unit_id' => 17, 'price' => 49000]);
-        GoodPrice::create(['good_variant_id' => 7, 'unit_id' => 17, 'price' => 30000]);
-        GoodPrice::create(['good_variant_id' => 8, 'unit_id' => 17, 'price' => 39000]);
-        GoodPrice::create(['good_variant_id' => 9, 'unit_id' => 17, 'price' => 35000]);
-        GoodPrice::create(['good_variant_id' => 10, 'unit_id' => 17, 'price' => 49000]);
-        GoodPrice::create(['good_variant_id' => 11, 'unit_id' => 17, 'price' => 30000]);
-        GoodPrice::create(['good_variant_id' => 12, 'unit_id' => 17, 'price' => 39000]);
+        GoodPrice::create(['good_variant_id' => 1, 'price' => 35000]);
+        GoodPrice::create(['good_variant_id' => 2, 'price' => 49000]);
+        GoodPrice::create(['good_variant_id' => 3, 'price' => 30000]);
+        GoodPrice::create(['good_variant_id' => 4, 'price' => 39000]);
+        GoodPrice::create(['good_variant_id' => 5, 'price' => 35000]);
+        GoodPrice::create(['good_variant_id' => 6, 'price' => 49000]);
+        GoodPrice::create(['good_variant_id' => 7, 'price' => 30000]);
+        GoodPrice::create(['good_variant_id' => 8, 'price' => 39000]);
+        GoodPrice::create(['good_variant_id' => 9, 'price' => 35000]);
+        GoodPrice::create(['good_variant_id' => 10, 'price' => 49000]);
+        GoodPrice::create(['good_variant_id' => 11, 'price' => 30000]);
+        GoodPrice::create(['good_variant_id' => 12, 'price' => 39000]);
     }
 }

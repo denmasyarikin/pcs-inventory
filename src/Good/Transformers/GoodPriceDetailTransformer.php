@@ -21,7 +21,6 @@ class GoodPriceDetailTransformer extends Detail
         return [
             'id' => $model->id,
             'chanel' => (new ChanelDetailTransformer($model->chanel, ['id', 'name', 'type', 'markup', 'required_down_payment', 'due_date_day_count']))->toArray(),
-            'unit' => (new UnitListDetailTransformer($model->unit))->toArray(),
             'price' => (int) $model->price,
             'current' => (bool) $model->current,
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),

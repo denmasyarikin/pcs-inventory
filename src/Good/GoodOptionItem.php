@@ -17,10 +17,10 @@ class GoodOptionItem extends Model
     protected $table = 'inventory_good_option_items';
 
     /**
-     * Get the option record associated with the Denma_02_01_005_GoodOptionItem.
+     * Get the goodOption record associated with the Denma_02_01_005_GoodOptionItem.
      */
-    public function option()
+    public function goodOption()
     {
-        return $this->belongsTo(GoodOption::class);
+        return $this->belongsTo(GoodOption::class)->withTrashed();
     }
 }

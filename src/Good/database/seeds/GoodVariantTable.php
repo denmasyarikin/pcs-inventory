@@ -16,8 +16,13 @@ class GoodVariantTable extends Seeder
     {
         GoodVariant::create([
             'id' => 1,
-            'name' => 'SIDU HVS A4 70 GSM',
-            'good_id' => 1
+            'name' => 'SIDU A4 70 GSM',
+            'good_id' => 1,
+            'unit_id' => 17,
+            'tracked' => true,
+            'on_hand' => 22,
+            'on_hold' => 3,
+            'ready_stock' => 19
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
@@ -28,8 +33,13 @@ class GoodVariantTable extends Seeder
 
         GoodVariant::create([
             'id' => 2,
-            'name' => 'SIDU HVS A4 80 GSM',
-            'good_id' => 1
+            'name' => 'SIDU A4 80 GSM',
+            'good_id' => 1,
+            'unit_id' => 17,
+            'tracked' => true,
+            'on_hand' => 14,
+            'on_hold' => 1,
+            'ready_stock' => 13
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
@@ -40,8 +50,9 @@ class GoodVariantTable extends Seeder
 
         GoodVariant::create([
             'id' => 3,
-            'name' => 'SIDU HVS F4 70 GSM',
-            'good_id' => 1
+            'name' => 'SIDU F4 70 GSM',
+            'good_id' => 1,
+            'unit_id' => 17
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
@@ -52,8 +63,14 @@ class GoodVariantTable extends Seeder
 
         GoodVariant::create([
             'id' => 4,
-            'name' => 'SIDU HVS F4 80 GSM',
-            'good_id' => 1
+            'name' => 'SIDU F4 80 GSM',
+            'good_id' => 1,
+            'unit_id' => 17,
+            'tracked' => true,
+            'on_hand' => 5,
+            'on_hold' => 2,
+            'ready_stock' => 3
+
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
@@ -64,8 +81,9 @@ class GoodVariantTable extends Seeder
 
         GoodVariant::create([
             'id' => 5,
-            'name' => 'SIDU HVS A3 70 GSM',
-            'good_id' => 1
+            'name' => 'SIDU A3 70 GSM',
+            'good_id' => 1,
+            'unit_id' => 17
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
@@ -76,8 +94,9 @@ class GoodVariantTable extends Seeder
 
         GoodVariant::create([
             'id' => 6,
-            'name' => 'SIDU HVS A3 80 GSM',
-            'good_id' => 1
+            'name' => 'SIDU A3 80 GSM',
+            'good_id' => 1,
+            'unit_id' => 17
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
@@ -88,8 +107,9 @@ class GoodVariantTable extends Seeder
 
         GoodVariant::create([
 			'id' => 7,
-			'name' => 'PAPERONE HVS A4 70 GSM',
-			'good_id' => 1
+			'name' => 'PAPERONE A4 70 GSM',
+			'good_id' => 1,
+            'unit_id' => 17
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
@@ -100,8 +120,9 @@ class GoodVariantTable extends Seeder
 
         GoodVariant::create([
 			'id' => 8,
-			'name' => 'PAPERONE HVS A4 80 GSM',
-			'good_id' => 1
+			'name' => 'PAPERONE A4 80 GSM',
+			'good_id' => 1,
+            'unit_id' => 17
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
@@ -112,8 +133,9 @@ class GoodVariantTable extends Seeder
 
         GoodVariant::create([
 			'id' => 9,
-			'name' => 'PAPERONE HVS F4 70 GSM',
-			'good_id' => 1
+			'name' => 'PAPERONE F4 70 GSM',
+			'good_id' => 1,
+            'unit_id' => 17
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
@@ -124,8 +146,9 @@ class GoodVariantTable extends Seeder
 
         GoodVariant::create([
             'id' => 10,
-            'name' => 'PAPERONE HVS F4 80 GSM',
-            'good_id' => 1
+            'name' => 'PAPERONE F4 80 GSM',
+            'good_id' => 1,
+            'unit_id' => 17
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
@@ -136,8 +159,9 @@ class GoodVariantTable extends Seeder
 
         GoodVariant::create([
             'id' => 11,
-            'name' => 'PAPERONE HVS A3 70 GSM',
-            'good_id' => 1
+            'name' => 'PAPERONE A3 70 GSM',
+            'good_id' => 1,
+            'unit_id' => 17
         ]);
 
         DB::table('inventory_good_variant_options')->insert([
@@ -148,8 +172,9 @@ class GoodVariantTable extends Seeder
 
         GoodVariant::create([
 			'id' => 12,
-			'name' => 'PAPERONE HVS A3 80 GSM',
-			'good_id' => 1
+			'name' => 'PAPERONE A3 80 GSM',
+			'good_id' => 1,
+            'unit_id' => 17
         ]);
 
         DB::table('inventory_good_variant_options')->insert([

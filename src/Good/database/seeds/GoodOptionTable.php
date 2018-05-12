@@ -29,12 +29,12 @@ class GoodOptionTable extends Seeder
             'name' => 'Ukuran'
         ]);
 
-        GoodOptionItem::create(['id' => 4, 'good_option_id' => 2, 'name' => 'A5', 'description' => '14,85cm x 21cm']);
-        GoodOptionItem::create(['id' => 5, 'good_option_id' => 2, 'name' => 'B5', 'description' => '18.2cm x 25.7cm']);
-        GoodOptionItem::create(['id' => 6, 'good_option_id' => 2, 'name' => 'A4', 'description' => '21cm x 29.7cm']);
-        GoodOptionItem::create(['id' => 7, 'good_option_id' => 2, 'name' => 'Q4', 'description' => '21.6cm x 27.9cm']);
-        GoodOptionItem::create(['id' => 8, 'good_option_id' => 2, 'name' => 'F4', 'description' => '21.6cm x 33cm']);
-        GoodOptionItem::create(['id' => 9, 'good_option_id' => 2, 'name' => 'A3', 'description' => '29.7cm x 42cm']);
+        GoodOptionItem::create(['id' => 4, 'good_option_id' => 2, 'name' => 'A5']);
+        GoodOptionItem::create(['id' => 5, 'good_option_id' => 2, 'name' => 'B5']);
+        GoodOptionItem::create(['id' => 6, 'good_option_id' => 2, 'name' => 'A4']);
+        GoodOptionItem::create(['id' => 7, 'good_option_id' => 2, 'name' => 'Q4']);
+        GoodOptionItem::create(['id' => 8, 'good_option_id' => 2, 'name' => 'F4']);
+        GoodOptionItem::create(['id' => 9, 'good_option_id' => 2, 'name' => 'A3']);
         
         GoodOption::create([
             'id' => 3,

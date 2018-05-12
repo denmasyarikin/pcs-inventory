@@ -2,7 +2,7 @@
 
 namespace Denmasyarikin\Inventory\Good\Requests;
 
-class CreateGoodPriceRequest extends DetailGoodVariantRequest
+class MoveGoodCategoryRequest extends DetailGoodRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -12,8 +12,7 @@ class CreateGoodPriceRequest extends DetailGoodVariantRequest
     public function rules()
     {
         return [
-			'chanel_id' => 'nullable|exists:core_chanels,id',
-			'price' => 'required|numeric'
-        ];
+            'good_category_id' => 'nullable|numeric|exists:inventory_good_categories,id'
+       ];
     }
 }

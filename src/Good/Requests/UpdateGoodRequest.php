@@ -14,7 +14,6 @@ class UpdateGoodRequest extends DetailGoodRequest
         return [
             'name' => 'required|max:50',
             'description' => 'nullable',
-            'good_category_id' => 'nullable|numeric|exists:inventory_good_categories,id',
             'status' => 'nullable|in:active,inactive',
        ];
     }
