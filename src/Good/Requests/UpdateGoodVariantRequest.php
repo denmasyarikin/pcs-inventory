@@ -12,7 +12,7 @@ class UpdateGoodVariantRequest extends DetailGoodVariantRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:30',
+            'name' => 'nullable|max:30',
             'tracked' => 'required|boolean',
             'enabled' => 'required|boolean',
             'on_hold' => 'integer',

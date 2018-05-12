@@ -12,7 +12,7 @@ class CreateGoodVariantRequest extends DetailGoodRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:30',
+            'name' => 'nullable|max:30',
             'tracked' => 'required|boolean',
             'on_hold' => 'integer',
             'on_hand' => 'integer',

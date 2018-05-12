@@ -69,6 +69,7 @@ class GoodPriceListFormatedTransformer extends Collection
     {
     	return [
             'id' => $price->id,
+            'chanel_id' => $price->chanel_id,
             'price' => (int) $price->price
     	];
     }
@@ -84,6 +85,7 @@ class GoodPriceListFormatedTransformer extends Collection
     {
     	return [
             'id' => null,
+            'chanel_id' => $chanel->id,
             'price' => (int) $basePrice->price + Money::round($basePrice->price * $chanel->markup / 100)
     	];
     }

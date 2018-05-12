@@ -27,7 +27,7 @@ class GoodPriceController extends Controller
         $goodVariant = $request->getGoodVariant();
 
         return new JsonResponse([
-            'data' => (new GoodPriceListTransformer($goodVariant->goodPrices))->toArray(),
+            'data' => (new GoodPriceListTransformer($goodVariant->goodPrices()->orderBy('id', 'DESC')->get()))->toArray(),
         ]);
     }
 
@@ -65,9 +65,14 @@ class GoodPriceController extends Controller
         $variant = $request->getGoodVariant();
         $price = $request->getGoodPrice();
 
-        $variant->goodPrices()
-                ->whereChanelId($price->chanel_id)
-                ->update(['current' => false]);
+        if ($price->chanel_id === null) {
+            $variant->goodPrices()
+                    ->update(['current' => false]);
+        } else {
+            $variant->goodPrices()
+                    ->whereChanelId($price->chanel_id)
+                    ->update(['current' => false]);
+        }
         
         $newPrice = $price->replicate();
         $newPrice->price = $request->price;
@@ -117,7 +122,7 @@ class GoodPriceController extends Controller
             $goodPrices->whereChanelId($chanelId);
         }
 
-        if ($goodPrices->count() > 0) {
+        if ($goodPrices->whereCurrent(true)->count() > 0) {
             throw new BadRequestHttpException("Variant price already exist");
         }
 
