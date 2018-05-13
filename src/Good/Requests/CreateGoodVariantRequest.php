@@ -18,7 +18,9 @@ class CreateGoodVariantRequest extends DetailGoodRequest
             'on_hand' => 'integer',
             'ready_stock' => 'integer',
             'unit_id' => 'required|exists:core_units,id',
-            'good_option_items_id' => 'nullable|array',
+            'min_order' => 'required|numeric',
+            'order_multiples' => 'required|numeric',
+            'good_option_items_id' => 'nullable|array|distinct',
             'good_option_items_id' => 'exists:inventory_good_option_items,id'
         ];
     }

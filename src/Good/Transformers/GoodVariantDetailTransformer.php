@@ -17,9 +17,12 @@ class GoodVariantDetailTransformer extends Detail
      */
     protected function getData(Model $model)
     {
+        $good = $model->good;
+
         return [
             'id' => $model->id,
             'name' => $model->name,
+            'good' => ['id' => $good->id, 'name' => $good->name],
             'unit_id' => $model->unit_id,
             'unit' => (new UnitListDetailTransformer($model->unit))->toArray(),
             'tracked' => (bool) $model->tracked,
@@ -30,6 +33,8 @@ class GoodVariantDetailTransformer extends Detail
             'good_option_items_id' => $model->goodOptionItems->pluck('id'),
             'option_items' => (new GoodOptionItemListTransformer($model->goodOptionItems))->toArray(),
             'prices' => (new GoodPriceListFormatedTransformer($model->goodPrices))->toArray(),
+            'min_order' => (float) $model->min_order,
+            'order_multiples' => (float) $model->order_multiples,
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $model->updated_at->format('Y-m-d H:i:s')
         ];

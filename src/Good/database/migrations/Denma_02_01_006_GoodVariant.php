@@ -21,6 +21,8 @@ class GoodVariant extends Migration
             $table->bigInteger('on_hold')->default(0);
             $table->bigInteger('on_hand')->default(0);
             $table->bigInteger('ready_stock')->comment('on hand minus on hold')->default(0);
+            $table->float('min_order')->default(1);
+            $table->float('order_multiples')->default(1);
             $table->timestamps();
             $table->softDeletes();
             

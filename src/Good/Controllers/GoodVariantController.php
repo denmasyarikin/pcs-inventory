@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Denmasyarikin\Inventory\Good\Good;
 use Denmasyarikin\Inventory\Good\GoodVariant;
 use Denmasyarikin\Inventory\Good\Requests\DetailGoodRequest;
+use Denmasyarikin\Inventory\Good\Requests\DetailVariantRequest;
 use Denmasyarikin\Inventory\Good\Requests\CreateGoodVariantRequest;
 use Denmasyarikin\Inventory\Good\Requests\UpdateGoodVariantRequest;
 use Denmasyarikin\Inventory\Good\Requests\DeleteGoodVariantRequest;
@@ -33,6 +34,20 @@ class GoodVariantController extends Controller
     }
 
     /**
+     * get detail.
+     *
+     * @param DetailProductRequest $request
+     *
+     * @return json
+     */
+    public function getDetail(DetailVariantRequest $request)
+    {
+        $transform = new GoodVariantDetailTransformer($request->getGoodVariant());
+
+        return new JsonResponse(['data' => $transform->toArray()]);
+    }
+
+    /**
      * create variant.
      *
      * @param CreateGoodVariantRequest $request
@@ -47,7 +62,7 @@ class GoodVariantController extends Controller
         $this->checkIsVariantExist($good, $goodOptionItemsId);
 
         $variant = $good->variants()->create(
-            $request->only(['name', 'tracked', 'on_hand', 'on_hold', 'ready_stock', 'unit_id'])
+            $request->only(['name', 'tracked', 'on_hand', 'on_hold', 'ready_stock', 'unit_id', 'min_order', 'order_multiples'])
         );
 
         $variant->goodOptionItems()->sync($request->good_option_items_id);
@@ -79,7 +94,7 @@ class GoodVariantController extends Controller
             }
         }
 
-        $variant->update($request->only(['name', 'tracked', 'enabled', 'on_hand', 'on_hold', 'ready_stock' ,'unit_id']));
+        $variant->update($request->only(['name', 'tracked', 'enabled', 'on_hand', 'on_hold', 'ready_stock' ,'unit_id', 'min_order', 'order_multiples']));
         $variant->goodOptionItems()->sync($request->good_option_items_id);
 
         return new JsonResponse([

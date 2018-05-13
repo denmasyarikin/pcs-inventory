@@ -14,7 +14,7 @@ class UpdateGoodRequest extends DetailGoodRequest
         return [
             'name' => 'required|max:50',
             'description' => 'nullable',
-            'status' => 'nullable|in:active,inactive',
+            'status' => 'nullable|in:draft,active,inactive',
        ];
     }
 }

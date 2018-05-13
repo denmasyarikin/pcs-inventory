@@ -2,6 +2,7 @@
 
 $router->get('/category', ['as' => 'inventory.good.category.list', 'uses' => 'GoodCategoryController@getList']);
 $router->get('/category/{id}', ['as' => 'inventory.good.category.detail', 'uses' => 'GoodCategoryController@getDetail']);
+$router->get('/variant/{id}', ['as' => 'inventory.good.variant.detail', 'uses' => 'GoodVariantController@getDetail']);
 $router->get('/', ['as' => 'inventory.good.list', 'uses' => 'GoodController@getList']);
 $router->get('/{id}', ['as' => 'inventory.good.detail', 'uses' => 'GoodController@getDetail']);
 $router->get('/{id}/attribute', ['as' => 'inventory.good.attribute.list', 'uses' => 'GoodAttributeController@getList']);

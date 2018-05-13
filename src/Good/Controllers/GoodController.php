@@ -12,6 +12,7 @@ use Denmasyarikin\Inventory\Good\Requests\UpdateGoodRequest;
 use Denmasyarikin\Inventory\Good\Requests\DeleteGoodRequest;
 use Denmasyarikin\Inventory\Good\Transformers\GoodListTransformer;
 use Denmasyarikin\Inventory\Good\Transformers\GoodDetailTransformer;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class GoodController extends Controller
 {
@@ -48,17 +49,14 @@ class GoodController extends Controller
     {
         $goods = Good::with('variants')->orderBy('name', 'ASC');
 
-        if ($request->has('category_id')) {
-            $goods->whereGoodCategoryId($request->category_id);
-        } else {
-            $goods->whereNull('good_category_id');
+        if ($request->has('key')) {
+            $goods->where('name', 'like', "%{$request->key}%");
         }
 
-        if ($request->has('key')) {
-            $goods->orwhere('name', 'like', "%{$request->key}%");
-            $goods->whereHas('variants', function($q) use ($request) {
-                $q->where('name', 'like', "%{$request->key}%");
-            });
+        if ($request->has('category_id')) {
+            $goods->whereGoodCategoryId($request->category_id);
+        } else if (!$request->has('key')) {
+            $goods->whereNull('good_category_id');
         }
 
         switch ($status) {
@@ -125,6 +123,11 @@ class GoodController extends Controller
     public function updateGood(UpdateGoodRequest $request)
     {
         $good = $request->getGood();
+
+        if ($request->status !== 'draft'
+            AND $good->variants()->count() === 0) {
+            throw new BadRequestHttpException('Can not update status with No Varinats');
+        }
 
         $good->update($request->only([
             'name', 'description', 'good_category_id', 'status'
