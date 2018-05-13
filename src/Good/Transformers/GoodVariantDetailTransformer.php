@@ -17,12 +17,10 @@ class GoodVariantDetailTransformer extends Detail
      */
     protected function getData(Model $model)
     {
-        $good = $model->good;
-
         return [
             'id' => $model->id,
             'name' => $model->name,
-            'good' => ['id' => $good->id, 'name' => $good->name],
+            'good' => (new GoodDetailTransformer($model->good))->toArray(),
             'unit_id' => $model->unit_id,
             'unit' => (new UnitListDetailTransformer($model->unit))->toArray(),
             'tracked' => (bool) $model->tracked,
