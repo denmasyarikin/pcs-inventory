@@ -22,11 +22,11 @@ class GoodOptionItemDetailTransformer extends Detail
             'id' => $model->id,
             'option' => [
                 'id' => $goodOption->id,
-                'name' => $goodOption->name
+                'name' => $goodOption->name,
             ],
             'name' => $model->name,
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),
-            'updated_at' => $model->updated_at->format('Y-m-d H:i:s')
+            'updated_at' => $model->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }

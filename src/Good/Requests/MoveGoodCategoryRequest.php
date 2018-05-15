@@ -12,7 +12,7 @@ class MoveGoodCategoryRequest extends DetailGoodRequest
     public function rules()
     {
         return [
-            'good_category_id' => 'nullable|numeric|exists:inventory_good_categories,id'
+            'good_category_id' => 'nullable|numeric|exists:inventory_good_categories,id',
        ];
     }
 }

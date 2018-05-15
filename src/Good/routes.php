@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 $router->get('/category', ['as' => 'inventory.good.category.list', 'uses' => 'GoodCategoryController@getList']);
 $router->get('/category/{id}', ['as' => 'inventory.good.category.detail', 'uses' => 'GoodCategoryController@getDetail']);
@@ -16,11 +17,11 @@ $router->group(['middleware' => 'manage:inventory,good,write'], function ($route
     $router->post('category', ['as' => 'inventory.good.category.create', 'uses' => 'GoodCategoryController@createCategory']);
     $router->put('category/{id}', ['as' => 'inventory.good.category.update', 'uses' => 'GoodCategoryController@updateCategory']);
     $router->delete('category/{id}', ['as' => 'inventory.good.category.delete', 'uses' => 'GoodCategoryController@deleteCategory']);
-    
+
     $router->post('/', ['as' => 'inventory.good.create', 'uses' => 'GoodController@createGood']);
     $router->put('/{id}', ['as' => 'inventory.good.update', 'uses' => 'GoodController@updateGood']);
     $router->delete('/{id}', ['as' => 'inventory.good.delete', 'uses' => 'GoodController@deleteGood']);
-	
+
     $router->post('/{id}/attribute', ['as' => 'inventory.good.attribute.create', 'uses' => 'GoodAttributeController@createAttribute']);
     $router->put('/{id}/attribute/{attribute_id}', ['as' => 'inventory.good.attribute.update', 'uses' => 'GoodAttributeController@updateAttribute']);
     $router->delete('/{id}/attribute/{attribute_id}', ['as' => 'inventory.good.attribute.delete', 'uses' => 'GoodAttributeController@deleteAttribute']);
@@ -29,14 +30,14 @@ $router->group(['middleware' => 'manage:inventory,good,write'], function ($route
         $router->post('/', ['as' => 'inventory.good.option.create', 'uses' => 'GoodOptionController@createOption']);
         $router->put('/{option_id}', ['as' => 'inventory.good.option.update', 'uses' => 'GoodOptionController@updateOption']);
         $router->delete('{option_id}', ['as' => 'inventory.good.option.delete', 'uses' => 'GoodOptionController@deleteOption']);
-        
+
         $router->group(['prefix' => '/{option_id}/item'], function ($router) {
             $router->post('/', ['as' => 'inventory.good.option.item.create', 'uses' => 'GoodOptionItemController@createOptionItem']);
             $router->put('/{item_id}', ['as' => 'inventory.good.option.item.update', 'uses' => 'GoodOptionItemController@updateOptionItem']);
             $router->delete('{item_id}', ['as' => 'inventory.good.option.item.delete', 'uses' => 'GoodOptionItemController@deleteOptionItem']);
-        });        
+        });
     });
-    
+
     $router->group(['prefix' => '/{id}/media'], function ($router) {
         $router->post('/', ['as' => 'inventory.good.media.create', 'uses' => 'GoodMediaController@createMedia']);
         $router->put('/{media_id}', ['as' => 'inventory.good.media.update', 'uses' => 'GoodMediaController@updateMedia']);
@@ -48,11 +49,11 @@ $router->group(['middleware' => 'manage:inventory,good,write'], function ($route
         $router->post('/', ['as' => 'inventory.good.variant.create', 'uses' => 'GoodVariantController@createVariant']);
         $router->put('/{variant_id}', ['as' => 'inventory.good.variant.update', 'uses' => 'GoodVariantController@updateVariant']);
         $router->delete('/{variant_id}', ['as' => 'inventory.good.variant.delete', 'uses' => 'GoodVariantController@deleteVariant']);
-        
+
         $router->group(['prefix' => '/{variant_id}/price'], function ($router) {
             $router->post('/', ['as' => 'inventory.good.price.create', 'uses' => 'GoodPriceController@createPrice']);
             $router->put('/{price_id}', ['as' => 'inventory.good.price.update', 'uses' => 'GoodPriceController@updatePrice']);
             $router->delete('{price_id}', ['as' => 'inventory.good.price.delete', 'uses' => 'GoodPriceController@deletePrice']);
-        });        
+        });
     });
 });

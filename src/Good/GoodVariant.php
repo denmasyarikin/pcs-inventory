@@ -21,7 +21,7 @@ class GoodVariant extends Model
      */
     public function good()
     {
-    	return $this->belongsTo(Good::class);
+        return $this->belongsTo(Good::class);
     }
 
     /**
@@ -37,7 +37,7 @@ class GoodVariant extends Model
      */
     public function goodPrices()
     {
-    	return $this->hasMany(GoodPrice::class);
+        return $this->hasMany(GoodPrice::class);
     }
 
     /**

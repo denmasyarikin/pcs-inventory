@@ -25,7 +25,7 @@ class GoodVariant extends Migration
             $table->float('order_multiples')->default(1);
             $table->timestamps();
             $table->softDeletes();
-            
+
             $table->foreign('good_id')->references('id')->on('inventory_goods');
             $table->foreign('unit_id')->references('id')->on('core_units');
         });

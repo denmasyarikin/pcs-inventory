@@ -15,25 +15,25 @@ class GoodAttributeTable extends Seeder
         GoodAttribute::create([
             'good_id' => 1,
             'key' => 'Ukuran',
-            'value' => 'A5, B5, A4, Q4, F4, A3'
+            'value' => 'A5, B5, A4, Q4, F4, A3',
         ]);
 
         GoodAttribute::create([
             'good_id' => 1,
             'key' => 'Warna',
-            'value' => 'Putih'
+            'value' => 'Putih',
         ]);
 
         GoodAttribute::create([
             'good_id' => 2,
             'key' => 'Ukuran',
-            'value' => '1,2m x 1m'
+            'value' => '1,2m x 1m',
         ]);
 
         GoodAttribute::create([
             'good_id' => 2,
             'key' => 'Warna',
-            'value' => 'Putih, Merah, Biru, Hijau, Kuning'
+            'value' => 'Putih, Merah, Biru, Hijau, Kuning',
         ]);
     }
 }

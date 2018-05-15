@@ -16,7 +16,7 @@ class GoodOptionTable extends Seeder
         GoodOption::create([
             'id' => 1,
             'good_id' => 1,
-            'name' => 'Merk'
+            'name' => 'Merk',
         ]);
 
         GoodOptionItem::create(['id' => 1, 'good_option_id' => 1, 'name' => 'Sinar Dunia']);
@@ -26,7 +26,7 @@ class GoodOptionTable extends Seeder
         GoodOption::create([
             'id' => 2,
             'good_id' => 1,
-            'name' => 'Ukuran'
+            'name' => 'Ukuran',
         ]);
 
         GoodOptionItem::create(['id' => 4, 'good_option_id' => 2, 'name' => 'A5']);
@@ -35,15 +35,15 @@ class GoodOptionTable extends Seeder
         GoodOptionItem::create(['id' => 7, 'good_option_id' => 2, 'name' => 'Q4']);
         GoodOptionItem::create(['id' => 8, 'good_option_id' => 2, 'name' => 'F4']);
         GoodOptionItem::create(['id' => 9, 'good_option_id' => 2, 'name' => 'A3']);
-        
+
         GoodOption::create([
             'id' => 3,
             'good_id' => 1,
-            'name' => 'Berat'
+            'name' => 'Berat',
         ]);
 
         GoodOptionItem::create(['id' => 10, 'good_option_id' => 3, 'name' => '70 gsm']);
         GoodOptionItem::create(['id' => 11, 'good_option_id' => 3, 'name' => '80 gsm']);
-        GoodOptionItem::create(['id' => 12, 'good_option_id' => 3, 'name' => '100 gsm']);        
+        GoodOptionItem::create(['id' => 12, 'good_option_id' => 3, 'name' => '100 gsm']);
     }
 }

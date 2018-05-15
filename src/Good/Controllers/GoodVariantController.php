@@ -88,13 +88,13 @@ class GoodVariantController extends Controller
 
         $this->checkIsVariantExist($good, $goodOptionItemsId, $variant);
 
-        if ((bool) $request->enabled === true) {
-            if ($variant->goodPrices()->count() === 0) {
+        if (true === (bool) $request->enabled) {
+            if (0 === $variant->goodPrices()->count()) {
                 throw new BadRequestHttpException('Can not be enabled with no prices');
             }
         }
 
-        $variant->update($request->only(['name', 'tracked', 'enabled', 'on_hand', 'on_hold', 'ready_stock' ,'unit_id', 'min_order', 'order_multiples']));
+        $variant->update($request->only(['name', 'tracked', 'enabled', 'on_hand', 'on_hold', 'ready_stock', 'unit_id', 'min_order', 'order_multiples']));
         $variant->goodOptionItems()->sync($request->good_option_items_id);
 
         return new JsonResponse([
@@ -119,23 +119,22 @@ class GoodVariantController extends Controller
     }
 
     /**
-     * check is variant exists
+     * check is variant exists.
      *
-     * @param Good $good
+     * @param Good  $good
      * @param array $goodOptionItemsId
-     * @return void
      */
     protected function checkIsVariantExist(Good $good, array $goodOptionItemsId, GoodVariant $exceptVariant = null)
-    {        
+    {
         foreach ($good->variants as $variant) {
-            if (! is_null($exceptVariant) AND $exceptVariant->id === $variant->id) {
+            if (!is_null($exceptVariant) and $exceptVariant->id === $variant->id) {
                 continue;
             }
 
             $options = $variant->goodOptionItems->pluck('id')->toArray();
 
             if ($options === $goodOptionItemsId) {
-                throw new BadRequestHttpException("Good Variant already exists");
+                throw new BadRequestHttpException('Good Variant already exists');
             }
         }
     }

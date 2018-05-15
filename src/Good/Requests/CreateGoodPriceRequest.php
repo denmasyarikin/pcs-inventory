@@ -12,8 +12,8 @@ class CreateGoodPriceRequest extends DetailGoodVariantRequest
     public function rules()
     {
         return [
-			'chanel_id' => 'nullable|exists:core_chanels,id',
-			'price' => 'required|numeric'
+            'chanel_id' => 'nullable|exists:core_chanels,id',
+            'price' => 'required|numeric',
         ];
     }
 }

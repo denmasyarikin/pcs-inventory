@@ -19,7 +19,7 @@ class Good extends Migration
             $table->enum('status', ['draft', 'active', 'inactive'])->default('draft');
             $table->timestamps();
             $table->softDeletes();
-            
+
             $table->foreign('good_category_id')->references('id')->on('inventory_good_categories');
         });
     }

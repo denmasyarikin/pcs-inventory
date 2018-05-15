@@ -42,12 +42,12 @@ class GoodMediaController extends Controller
     {
         $good = $request->getGood();
 
-        if ($good->medias->count() === 0) {
+        if (0 === $good->medias->count()) {
             $request->merge(['primary' => true]);
         }
 
         $media = $good->medias()->create($request->only([
-            'type', 'content', 'sequence', 'primary'
+            'type', 'content', 'sequence', 'primary',
         ]));
 
         return new JsonResponse([
@@ -113,7 +113,7 @@ class GoodMediaController extends Controller
         $media->delete();
         $medias = $good->medias;
 
-        if ($medias->count() > 0 AND $medias->whereStrict('primary', true)->count() === 0) {
+        if ($medias->count() > 0 and 0 === $medias->whereStrict('primary', true)->count()) {
             $media = $good->medias()->first();
             $media->update(['primary' => true]);
         }

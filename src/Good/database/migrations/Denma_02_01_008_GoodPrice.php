@@ -19,7 +19,7 @@ class GoodPrice extends Migration
             $table->boolean('current')->default(true);
             $table->timestamps();
             $table->softDeletes();
-            
+
             $table->foreign('good_variant_id')->references('id')->on('inventory_good_variants');
             $table->foreign('chanel_id')->references('id')->on('core_chanels');
         });

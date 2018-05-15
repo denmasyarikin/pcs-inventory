@@ -21,14 +21,14 @@ class GoodPrice extends Model
      */
     public function goodVariant()
     {
-    	return $this->belongsTo(GoodVariant::class);
-    } 
+        return $this->belongsTo(GoodVariant::class);
+    }
 
     /**
      * Get the chanel record associated with the GoodPrice.
      */
     public function chanel()
     {
-    	return $this->belongsTo('Modules\Chanel\Chanel');
+        return $this->belongsTo('Modules\Chanel\Chanel');
     }
 }

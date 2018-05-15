@@ -34,7 +34,7 @@ class GoodVariantDetailTransformer extends Detail
             'min_order' => (float) $model->min_order,
             'order_multiples' => (float) $model->order_multiples,
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),
-            'updated_at' => $model->updated_at->format('Y-m-d H:i:s')
+            'updated_at' => $model->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }

@@ -27,13 +27,13 @@ class GoodController extends Controller
     {
         $goods = $this->getGoodList($request, $request->get('status'));
         $draftGoods = $this->getGoodList($request, 'draft');
-        
+
         $transform = new GoodListTransformer($goods);
         $transformDraft = new GoodListTransformer($draftGoods);
 
         return new JsonResponse([
             'data' => $transform->toArray(),
-            'draft' => $transformDraft->toArray()
+            'draft' => $transformDraft->toArray(),
         ]);
     }
 
@@ -41,7 +41,7 @@ class GoodController extends Controller
      * get bank list.
      *
      * @param Request $request
-     * @param string $status
+     * @param string  $status
      *
      * @return paginator
      */
@@ -55,7 +55,7 @@ class GoodController extends Controller
 
         if ($request->has('category_id')) {
             $goods->whereGoodCategoryId($request->category_id);
-        } else if (!$request->has('key')) {
+        } elseif (!$request->has('key')) {
             $goods->whereNull('good_category_id');
         }
 
@@ -104,7 +104,7 @@ class GoodController extends Controller
     public function createGood(CreateGoodRequest $request)
     {
         $good = Good::create($request->only([
-            'name', 'description', 'good_category_id'
+            'name', 'description', 'good_category_id',
         ]));
 
         return new JsonResponse([
@@ -124,13 +124,13 @@ class GoodController extends Controller
     {
         $good = $request->getGood();
 
-        if ($request->status !== 'draft'
-            AND $good->variants()->count() === 0) {
+        if ('draft' !== $request->status
+            and 0 === $good->variants()->count()) {
             throw new BadRequestHttpException('Can not update status with No Varinats');
         }
 
         $good->update($request->only([
-            'name', 'description', 'good_category_id', 'status'
+            'name', 'description', 'good_category_id', 'status',
         ]));
 
         return new JsonResponse([

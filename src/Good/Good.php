@@ -21,7 +21,7 @@ class Good extends Model
      */
     public function goodCategory()
     {
-    	return $this->belongsTo(GoodCategory::class);
+        return $this->belongsTo(GoodCategory::class);
     }
 
     /**
@@ -29,7 +29,7 @@ class Good extends Model
      */
     public function attributes()
     {
-    	return $this->hasMany(GoodAttribute::class);
+        return $this->hasMany(GoodAttribute::class);
     }
 
     /**
@@ -37,7 +37,7 @@ class Good extends Model
      */
     public function options()
     {
-    	return $this->hasMany(GoodOption::class);
+        return $this->hasMany(GoodOption::class);
     }
 
     /**
@@ -45,7 +45,7 @@ class Good extends Model
      */
     public function variants()
     {
-    	return $this->hasMany(GoodVariant::class);
+        return $this->hasMany(GoodVariant::class);
     }
 
     /**
@@ -53,7 +53,7 @@ class Good extends Model
      */
     public function medias()
     {
-    	return $this->hasMany(GoodMedia::class);
+        return $this->hasMany(GoodMedia::class);
     }
 
     /**

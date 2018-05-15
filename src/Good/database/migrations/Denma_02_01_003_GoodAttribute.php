@@ -18,7 +18,7 @@ class GoodAttribute extends Migration
             $table->text('value');
             $table->timestamps();
             $table->softDeletes();
-            
+
             $table->foreign('good_id')->references('id')->on('inventory_goods');
         });
     }

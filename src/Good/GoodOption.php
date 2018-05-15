@@ -21,7 +21,7 @@ class GoodOption extends Model
      */
     public function good()
     {
-    	return $this->belongsTo(Good::class);
+        return $this->belongsTo(Good::class);
     }
 
     /**
@@ -29,7 +29,7 @@ class GoodOption extends Model
      */
     public function goodOptionItems()
     {
-    	return $this->hasMany(GoodOptionItem::class);
+        return $this->hasMany(GoodOptionItem::class);
     }
 
     /**
@@ -37,6 +37,6 @@ class GoodOption extends Model
      */
     public function goodVariants()
     {
-    	return $this->belongsToMany(GoodVariant::class, 'inventory_good_variant_options')->withTimestamps();
+        return $this->belongsToMany(GoodVariant::class, 'inventory_good_variant_options')->withTimestamps();
     }
 }

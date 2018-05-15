@@ -27,7 +27,7 @@ class GoodDetailTransformer extends Detail
             'variant_count' => $model->variants()->count(),
             'option_count' => $model->options()->count(),
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),
-            'updated_at' => $model->updated_at->format('Y-m-d H:i:s')
+            'updated_at' => $model->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }

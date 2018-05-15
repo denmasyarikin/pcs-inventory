@@ -23,7 +23,7 @@ class GoodListDetailTransformer extends Detail
             'variant_count' => $model->variants->count(),
             'option_count' => $model->options->count(),
             'description' => $model->description,
-            'status' => $model->status
+            'status' => $model->status,
         ];
     }
 }

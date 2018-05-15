@@ -17,7 +17,7 @@ class GoodOptionItem extends Migration
             $table->integer('good_option_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
-            
+
             $table->foreign('good_option_id')->references('id')->on('inventory_good_options');
         });
     }

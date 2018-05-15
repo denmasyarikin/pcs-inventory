@@ -21,7 +21,7 @@ class GoodCategory extends Model
      */
     public function goods()
     {
-    	return $this->hasMany(Good::class);
+        return $this->hasMany(Good::class);
     }
 
     /**
@@ -29,7 +29,7 @@ class GoodCategory extends Model
      */
     public function parent()
     {
-    	return $this->belongsTo(static::class);
+        return $this->belongsTo(static::class);
     }
 
     /**
@@ -37,6 +37,6 @@ class GoodCategory extends Model
      */
     public function children()
     {
-    	return $this->hasMany(static::class, 'parent_id');
+        return $this->hasMany(static::class, 'parent_id');
     }
 }

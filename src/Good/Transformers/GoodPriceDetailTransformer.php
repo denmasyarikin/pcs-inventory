@@ -5,7 +5,6 @@ namespace Denmasyarikin\Inventory\Good\Transformers;
 use App\Http\Transformers\Detail;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Chanel\Transformers\ChanelDetailTransformer;
-use Modules\Unit\Transformers\UnitListDetailTransformer;
 
 class GoodPriceDetailTransformer extends Detail
 {
@@ -24,7 +23,7 @@ class GoodPriceDetailTransformer extends Detail
             'price' => (int) $model->price,
             'current' => (bool) $model->current,
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),
-            'updated_at' => $model->updated_at->format('Y-m-d H:i:s')
+            'updated_at' => $model->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }

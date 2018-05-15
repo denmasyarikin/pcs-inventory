@@ -16,7 +16,7 @@ class GoodVariantOption extends Migration
             $table->integer('good_variant_id')->nullable()->default(null)->unsigned();
             $table->integer('good_option_item_id')->nullable()->default(null)->unsigned();
             $table->timestamps();
-            
+
             $table->foreign('good_variant_id')->references('id')->on('inventory_good_variants');
             $table->foreign('good_option_item_id')->references('id')->on('inventory_good_option_items');
         });

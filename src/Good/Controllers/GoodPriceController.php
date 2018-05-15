@@ -65,7 +65,7 @@ class GoodPriceController extends Controller
         $variant = $request->getGoodVariant();
         $price = $request->getGoodPrice();
 
-        if ($price->chanel_id === null) {
+        if (null === $price->chanel_id) {
             $variant->goodPrices()
                     ->update(['current' => false]);
         } else {
@@ -73,7 +73,7 @@ class GoodPriceController extends Controller
                     ->whereChanelId($price->chanel_id)
                     ->update(['current' => false]);
         }
-        
+
         $newPrice = $price->replicate();
         $newPrice->price = $request->price;
         $newPrice->current = true;
@@ -97,7 +97,7 @@ class GoodPriceController extends Controller
         $price = $request->getGoodPrice();
 
         if ((bool) $price->current) {
-            throw new BadRequestHttpException("Current Price not allowed to delete");            
+            throw new BadRequestHttpException('Current Price not allowed to delete');
         }
 
         $price->delete();
@@ -106,11 +106,10 @@ class GoodPriceController extends Controller
     }
 
     /**
-     * check is good variant price exist
+     * check is good variant price exist.
      *
      * @param param type $goodVariant
-     * @param mixed $chanelId
-     * @return void
+     * @param mixed      $chanelId
      */
     protected function checkIsVariantPriceExist(GoodVariant $goodVariant, $chanelId = null)
     {
@@ -123,7 +122,7 @@ class GoodPriceController extends Controller
         }
 
         if ($goodPrices->whereCurrent(true)->count() > 0) {
-            throw new BadRequestHttpException("Variant price already exist");
+            throw new BadRequestHttpException('Variant price already exist');
         }
 
         return;
