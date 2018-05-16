@@ -14,7 +14,7 @@ class GoodPrice extends Model
      *
      * @var string
      */
-    protected $table = 'inventory_good_priceses';
+    protected $table = 'inventory_good_prices';
 
     /**
      * Get the goodVariant record associated with the GoodPrice.

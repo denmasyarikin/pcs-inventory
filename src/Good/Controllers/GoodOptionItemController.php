@@ -41,7 +41,7 @@ class GoodOptionItemController extends Controller
         $goodOption = $request->getGoodOption();
 
         $option = $goodOption->goodOptionItems()->create(
-            $request->only(['name', 'description'])
+            $request->only(['name'])
         );
 
         return new JsonResponse([
@@ -61,7 +61,7 @@ class GoodOptionItemController extends Controller
     {
         $item = $request->getGoodOptionItem();
 
-        $item->update($request->only(['name', 'description']));
+        $item->update($request->only(['name']));
 
         return new JsonResponse([
             'messaage' => 'Good option item has been updated',

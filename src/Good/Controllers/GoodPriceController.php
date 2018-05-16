@@ -81,7 +81,7 @@ class GoodPriceController extends Controller
 
         return new JsonResponse([
             'messaage' => 'Good price has been updated',
-            'data' => (new GoodPriceDetailTransformer($price))->toArray(),
+            'data' => (new GoodPriceDetailTransformer($newPrice))->toArray(),
         ]);
     }
 

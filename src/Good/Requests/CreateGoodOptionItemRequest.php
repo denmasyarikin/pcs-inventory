@@ -12,8 +12,7 @@ class CreateGoodOptionItemRequest extends DetailGoodOptionRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:30',
-            'description' => 'nullable',
+            'name' => 'required|max:30'
         ];
     }
 }
