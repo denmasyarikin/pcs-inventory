@@ -2,8 +2,11 @@
 
 namespace Denmasyarikin\Inventory\Good\Controllers;
 
+use Modules\Chanel\Chanel;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Denmasyarikin\Inventory\Good\GoodVariant;
+use Denmasyarikin\Inventory\Good\GoodPriceCalculator;
 use Denmasyarikin\Inventory\Good\Requests\DetailGoodVariantRequest;
 use Denmasyarikin\Inventory\Good\Requests\CreateGoodPriceRequest;
 use Denmasyarikin\Inventory\Good\Requests\UpdateGoodPriceRequest;
@@ -40,10 +43,28 @@ class GoodPriceController extends Controller
     public function createPrice(CreateGoodPriceRequest $request)
     {
         $goodVariant = $request->getGoodVariant();
+        $this->checkIsVariantPriceExist($goodVariant, $request->chanel_id);
 
-        $price = $goodVariant->goodPrices()->create(
-            $request->only(['chanel_id', 'price'])
-        );
+        $data = $request->only(['chanel_id', 'price']);
+        $data['current'] = true;
+
+        $calculator = new GoodPriceCalculator($goodVariant);
+        $defaultPrice = null;
+        
+        if (null !== $request->chanel_id) {
+            $chanel = Chanel::whereStatus('active')->find($request->chanel_id);
+            if (!is_null($chanel)) {
+                $defaultPrice = $calculator->getChanelPrice($chanel);
+            }
+        }
+        
+        if ($defaultPrice) {
+            $data['previous_id'] = $defaultPrice->id;
+            $data['change_type'] = $request->price > $defaultPrice->price ? 'up' : 'down';
+            $data['difference'] = $request->price - $defaultPrice->price;
+        }
+
+        $price = $goodVariant->goodPrices()->create($data);
 
         return new JsonResponse([
             'messaage' => 'Good price has been created',
@@ -60,13 +81,18 @@ class GoodPriceController extends Controller
      */
     public function updatePrice(UpdateGoodPriceRequest $request)
     {
-        $variant = $request->getGoodVariant();
         $price = $request->getGoodPrice();
+        $variant = $request->getGoodVariant();
+
+        $calculator = new GoodPriceCalculator($variant);
+        $defaultPrice = null;
 
         if (null === $price->chanel_id) {
+            $defaultPrice = $calculator->getBasePrice();
             $variant->goodPrices()
                     ->update(['current' => false]);
         } else {
+            $defaultPrice = $calculator->getChanelPrice($price->chanel);
             $variant->goodPrices()
                     ->whereChanelId($price->chanel_id)
                     ->update(['current' => false]);
@@ -75,6 +101,9 @@ class GoodPriceController extends Controller
         $newPrice = $price->replicate();
         $newPrice->price = $request->price;
         $newPrice->current = true;
+        $newPrice->previous_id = $newPrice->id;
+        $newPrice->change_type = $newPrice->price > $defaultPrice->price ? 'up' : 'down';
+        $newPrice->difference = $newPrice->price - $defaultPrice->price;
         $newPrice->save();
 
         return new JsonResponse([
@@ -101,5 +130,28 @@ class GoodPriceController extends Controller
         $price->delete();
 
         return new JsonResponse(['messaage' => 'Good price has been deleted']);
+    }
+
+    /**
+     * check is service variant price exist.
+     *
+     * @param GoodVariant $goodVariant
+     * @param mixed      $chanelId
+     */
+    protected function checkIsVariantPriceExist(GoodVariant $goodVariant, $chanelId = null)
+    {
+        $variantPrices = $goodVariant->goodPrices();
+
+        if (is_null($chanelId)) {
+            $variantPrices->whereNull('chanel_id');
+        } else {
+            $variantPrices->whereChanelId($chanelId);
+        }
+
+        if ($variantPrices->whereCurrent(true)->count() > 0) {
+            throw new BadRequestHttpException('variant price already exist');
+        }
+
+        return;
     }
 }

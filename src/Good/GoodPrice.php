@@ -42,4 +42,12 @@ class GoodPrice extends Model implements Price
     {
         return $this->belongsTo('Modules\Chanel\Chanel');
     }
+    
+    /**
+     * Get the previous record associated with the GoodPrice.
+     */
+    public function previous()
+    {
+        return $this->belongsTo(static::class, 'previous_id');
+    }
 }
