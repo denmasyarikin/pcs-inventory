@@ -11,7 +11,7 @@ $router->get('/{id}/option', ['as' => 'inventory.good.option.list', 'uses' => 'G
 $router->get('/{id}/option/{option_id}/item', ['as' => 'inventory.good.option.item.list', 'uses' => 'GoodOptionItemController@getList']);
 $router->get('/{id}/media', ['as' => 'inventory.good.media.list', 'uses' => 'GoodMediaController@getList']);
 $router->get('/{id}/variant', ['as' => 'inventory.good.variant.list', 'uses' => 'GoodVariantController@getList']);
-$router->get('/{id}/variant/{variant_id}/price', ['as' => 'inventory.good.price.list', 'uses' => 'GoodPriceController@getList']);
+$router->get('/{id}/variant/{variant_id}/price', ['as' => 'inventory.good.variant.price.list', 'uses' => 'GoodPriceController@getList']);
 
 $router->group(['middleware' => 'manage:inventory,good,write'], function ($router) {
     $router->post('category', ['as' => 'inventory.good.category.create', 'uses' => 'GoodCategoryController@createCategory']);
@@ -51,9 +51,9 @@ $router->group(['middleware' => 'manage:inventory,good,write'], function ($route
         $router->delete('/{variant_id}', ['as' => 'inventory.good.variant.delete', 'uses' => 'GoodVariantController@deleteVariant']);
 
         $router->group(['prefix' => '/{variant_id}/price'], function ($router) {
-            $router->post('/', ['as' => 'inventory.good.price.create', 'uses' => 'GoodPriceController@createPrice']);
-            $router->put('/{price_id}', ['as' => 'inventory.good.price.update', 'uses' => 'GoodPriceController@updatePrice']);
-            $router->delete('{price_id}', ['as' => 'inventory.good.price.delete', 'uses' => 'GoodPriceController@deletePrice']);
+            $router->post('/', ['as' => 'inventory.good.variant.price.create', 'uses' => 'GoodPriceController@createPrice']);
+            $router->put('/{price_id}', ['as' => 'inventory.good.variant.price.update', 'uses' => 'GoodPriceController@updatePrice']);
+            $router->delete('{price_id}', ['as' => 'inventory.good.variant.price.delete', 'uses' => 'GoodPriceController@deletePrice']);
         });
     });
 });

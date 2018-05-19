@@ -4,7 +4,6 @@ namespace Denmasyarikin\Inventory\Good\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Denmasyarikin\Inventory\Good\GoodVariant;
 use Denmasyarikin\Inventory\Good\Requests\DetailGoodVariantRequest;
 use Denmasyarikin\Inventory\Good\Requests\CreateGoodPriceRequest;
 use Denmasyarikin\Inventory\Good\Requests\UpdateGoodPriceRequest;
@@ -41,7 +40,6 @@ class GoodPriceController extends Controller
     public function createPrice(CreateGoodPriceRequest $request)
     {
         $goodVariant = $request->getGoodVariant();
-        $this->checkIsVariantPriceExist($goodVariant, $request->chanel_id);
 
         $price = $goodVariant->goodPrices()->create(
             $request->only(['chanel_id', 'price'])
@@ -103,28 +101,5 @@ class GoodPriceController extends Controller
         $price->delete();
 
         return new JsonResponse(['messaage' => 'Good price has been deleted']);
-    }
-
-    /**
-     * check is good variant price exist.
-     *
-     * @param param type $goodVariant
-     * @param mixed      $chanelId
-     */
-    protected function checkIsVariantPriceExist(GoodVariant $goodVariant, $chanelId = null)
-    {
-        $goodPrices = $goodVariant->goodPrices();
-
-        if (is_null($chanelId)) {
-            $goodPrices->whereNull('chanel_id');
-        } else {
-            $goodPrices->whereChanelId($chanelId);
-        }
-
-        if ($goodPrices->whereCurrent(true)->count() > 0) {
-            throw new BadRequestHttpException('Variant price already exist');
-        }
-
-        return;
     }
 }

@@ -4,6 +4,7 @@ namespace Denmasyarikin\Inventory\Good\Transformers;
 
 use App\Http\Transformers\Detail;
 use Illuminate\Database\Eloquent\Model;
+use Denmasyarikin\Inventory\Good\GoodPriceCalculator;
 use Modules\Unit\Transformers\UnitListDetailTransformer;
 
 class GoodVariantDetailTransformer extends Detail
@@ -17,6 +18,8 @@ class GoodVariantDetailTransformer extends Detail
      */
     protected function getData(Model $model)
     {
+        $calculator = new GoodPriceCalculator($model);
+
         return [
             'id' => $model->id,
             'name' => $model->name,
@@ -30,7 +33,7 @@ class GoodVariantDetailTransformer extends Detail
             'ready_stock' => (int) $model->ready_stock,
             'good_option_items_id' => $model->goodOptionItems->pluck('id'),
             'option_items' => (new GoodOptionItemListTransformer($model->goodOptionItems))->toArray(),
-            'prices' => (new GoodPriceListFormatedTransformer($model->goodPrices))->toArray(),
+            'prices' => (new GoodPriceListTransformer($calculator->getAllPrices()))->toArray(),
             'min_order' => (float) $model->min_order,
             'order_multiples' => (float) $model->order_multiples,
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),

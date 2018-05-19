@@ -3,9 +3,10 @@
 namespace Denmasyarikin\Inventory\Good;
 
 use App\Model;
+use App\Manager\Contracts\Priceable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class GoodVariant extends Model
+class GoodVariant extends Model implements Priceable
 {
     use SoftDeletes;
 
@@ -38,6 +39,16 @@ class GoodVariant extends Model
     public function goodPrices()
     {
         return $this->hasMany(GoodPrice::class);
+    }
+
+    /**
+     * get prices.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function getPrices()
+    {
+        return $this->goodPrices();
     }
 
     /**

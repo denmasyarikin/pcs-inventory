@@ -12,7 +12,7 @@ class UpdateGoodOptionItemRequest extends DetailGoodOptionItemRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:30'
+            'name' => 'required|max:30',
         ];
     }
 }
