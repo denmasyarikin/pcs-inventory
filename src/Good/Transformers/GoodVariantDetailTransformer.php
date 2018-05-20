@@ -33,6 +33,7 @@ class GoodVariantDetailTransformer extends Detail
             'ready_stock' => (int) $model->ready_stock,
             'good_option_items_id' => $model->goodOptionItems->pluck('id'),
             'option_items' => (new GoodOptionItemListTransformer($model->goodOptionItems))->toArray(),
+            'base_price' => $calculator->getBasePrice() ? $calculator->getBasePrice()->price : null,
             'prices' => (new GoodPriceListTransformer($calculator->getAllPrices()))->toArray(),
             'min_order' => (float) $model->min_order,
             'order_multiples' => (float) $model->order_multiples,
