@@ -3,11 +3,12 @@
 namespace Denmasyarikin\Inventory\Good;
 
 use App\Model;
+use Modules\Workspace\WorkspaceRelation;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class GoodCategory extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, WorkspaceRelation;
 
     /**
      * The table associated with the model.
@@ -38,5 +39,13 @@ class GoodCategory extends Model
     public function children()
     {
         return $this->hasMany(static::class, 'parent_id');
+    }
+
+    /**
+     * Get the workspaces record associated with the Good.
+     */
+    public function workspaces()
+    {
+        return $this->belongsToMany('Modules\Workspace\Workspace', 'inventory_good_category_workspaces')->whereStatus('active')->withTimestamps();
     }
 }

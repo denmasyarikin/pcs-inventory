@@ -3,11 +3,12 @@
 namespace Denmasyarikin\Inventory\Good;
 
 use App\Model;
+use Modules\Workspace\WorkspaceRelation;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Good extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, WorkspaceRelation;
 
     /**
      * The table associated with the model.
@@ -54,6 +55,14 @@ class Good extends Model
     public function medias()
     {
         return $this->hasMany(GoodMedia::class);
+    }
+
+    /**
+     * Get the workspaces record associated with the Good.
+     */
+    public function workspaces()
+    {
+        return $this->belongsToMany('Modules\Workspace\Workspace', 'inventory_good_workspaces')->whereStatus('active')->withTimestamps();
     }
 
     /**

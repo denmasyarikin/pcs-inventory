@@ -59,6 +59,12 @@ class GoodController extends Controller
             $goods->whereNull('good_category_id');
         }
 
+        if ($request->has('workspace_id')) {
+            $goods->workspaceId($request->workspace_id);
+        } else {
+            $goods->myWorkspace();
+        }
+
         switch ($status) {
             case 'all':
                 // do nothing
@@ -107,6 +113,8 @@ class GoodController extends Controller
             'name', 'description', 'good_category_id',
         ]));
 
+        $good->workspaces()->sync($request->workspace_ids);
+
         return new JsonResponse([
             'message' => 'Good has been created',
             'data' => (new GoodDetailTransformer($good))->toArray(),
@@ -132,6 +140,8 @@ class GoodController extends Controller
         $good->update($request->only([
             'name', 'description', 'good_category_id', 'status',
         ]));
+
+        $good->workspaces()->sync($request->workspace_ids);
 
         return new JsonResponse([
             'message' => 'Good has been updated',

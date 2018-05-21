@@ -4,6 +4,7 @@ namespace Denmasyarikin\Inventory\Good\Transformers;
 
 use App\Http\Transformers\Detail;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Workspace\Transformers\WorkspaceListTransformer;
 
 class GoodDetailTransformer extends Detail
 {
@@ -25,6 +26,8 @@ class GoodDetailTransformer extends Detail
             'image' => $model->image,
             'status' => $model->status,
             'variant_count' => $model->variants()->count(),
+            'workspace_ids' => $model->workspaces->pluck('id'),
+            'workspaces' => (new WorkspaceListTransformer($model->workspaces))->toArray(),
             'option_count' => $model->options()->count(),
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $model->updated_at->format('Y-m-d H:i:s'),

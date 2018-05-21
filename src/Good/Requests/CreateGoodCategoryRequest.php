@@ -17,6 +17,8 @@ class CreateGoodCategoryRequest extends FormRequest
             'name' => 'required|min:3|max:20',
             'image' => 'nullable',
             'parent_id' => 'nullable|numeric|exists:inventory_good_categories,id',
+            'workspace_ids' => 'required|array|min:1',
+            'workspace_ids.*' => 'exists:core_workspaces,id'
         ];
     }
 }

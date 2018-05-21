@@ -20,6 +20,7 @@ class GoodListDetailTransformer extends Detail
             'id' => $model->id,
             'name' => $model->name,
             'image' => $model->image,
+            'workspace_ids' => $model->workspaces->pluck('id'),
             'variant_count' => $model->variants->count(),
             'option_count' => $model->options->count(),
             'description' => $model->description,

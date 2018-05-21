@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Good\database\seeds\GoodOptionTable::class);
         $this->call(Good\database\seeds\GoodVariantTable::class);
         $this->call(Good\database\seeds\GoodPriceTable::class);
+        $this->call(Good\database\seeds\GoodWorkspace::class);
     }
 }

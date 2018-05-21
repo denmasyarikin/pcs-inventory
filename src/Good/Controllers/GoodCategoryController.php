@@ -64,6 +64,12 @@ class GoodCategoryController extends Controller
             $categories->whereNull('parent_id');
         }
 
+        if ($request->has('workspace_id')) {
+            $categories->workspaceId($request->workspace_id);
+        } else {
+            $categories->myWorkspace();
+        }
+
         if ($request->has('key')) {
             $categories->orwhere('name', 'like', "%{$request->key}%");
         }
@@ -86,7 +92,7 @@ class GoodCategoryController extends Controller
     }
 
     /**
-     * create product category.
+     * create good category.
      *
      * @param CreateGoodCategoryRequest $request
      *
@@ -94,16 +100,18 @@ class GoodCategoryController extends Controller
      */
     public function createCategory(CreateGoodCategoryRequest $request)
     {
-        $productCategory = GoodCategory::create($request->only(['name', 'image', 'parent_id']));
+        $goodCategory = GoodCategory::create($request->only(['name', 'image', 'parent_id']));
+
+        $goodCategory->workspaces()->sync($request->workspace_ids);
 
         return new JsonResponse([
             'message' => 'Good category has been created',
-            'data' => (new GoodCategoryDetailTransformer($productCategory))->toArray(),
+            'data' => (new GoodCategoryDetailTransformer($goodCategory))->toArray(),
         ], 201);
     }
 
     /**
-     * update product category.
+     * update good category.
      *
      * @param UpdateGoodCategoryRequest $request
      *
@@ -111,15 +119,16 @@ class GoodCategoryController extends Controller
      */
     public function updateCategory(UpdateGoodCategoryRequest $request)
     {
-        $productCategory = $request->getGoodCategory();
+        $goodCategory = $request->getGoodCategory();
 
-        $productCategory->update($request->only(['name', 'image', 'parent_id']));
+        $goodCategory->update($request->only(['name', 'image', 'parent_id']));
+        $goodCategory->workspaces()->sync($request->workspace_ids);
 
         return new JsonResponse(['message' => 'Good category has been updated']);
     }
 
     /**
-     * update product category.
+     * update good category.
      *
      * @param DeleteGoodCategoryRequest $request
      *
@@ -127,17 +136,17 @@ class GoodCategoryController extends Controller
      */
     public function deleteCategory(DeleteGoodCategoryRequest $request)
     {
-        $productCategory = $request->getGoodCategory();
+        $goodCategory = $request->getGoodCategory();
 
-        foreach ($productCategory->children as $category) {
-            $category->update(['parent_id' => $productCategory->parent_id]);
+        foreach ($goodCategory->children as $category) {
+            $category->update(['parent_id' => $goodCategory->parent_id]);
         }
 
-        foreach ($productCategory->goods as $good) {
-            $good->update(['category_id' => $productCategory->parent_id]);
+        foreach ($goodCategory->goods as $good) {
+            $good->update(['category_id' => $goodCategory->parent_id]);
         }
 
-        $productCategory->delete();
+        $goodCategory->delete();
 
         return new JsonResponse(['message' => 'Good category has been deleted']);
     }
