@@ -143,7 +143,7 @@ class GoodCategoryController extends Controller
         }
 
         foreach ($goodCategory->goods as $good) {
-            $good->update(['category_id' => $goodCategory->parent_id]);
+            $good->update(['good_category_id' => $goodCategory->parent_id]);
         }
 
         $goodCategory->delete();
