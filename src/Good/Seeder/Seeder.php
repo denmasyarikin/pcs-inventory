@@ -8,6 +8,7 @@ use Modules\Workspace\Workspace;
 use Illuminate\Support\Facades\File;
 use Denmasyarikin\Inventory\Good\Good;
 use Denmasyarikin\Inventory\Good\GoodCategory;
+use Denmasyarikin\Inventory\Good\GoodOptionItem;
 
 class Seeder
 {
@@ -177,6 +178,11 @@ class Seeder
 	protected function seedGood($path, GoodCategory $category = null)
 	{
 		$name = $this->getNameFromPath($path);
+
+		if ($name === 'Template') {
+			return;
+		}
+
 		$data = ['name' => $name];
 		
 		if (!is_null($category)) {
@@ -201,9 +207,21 @@ class Seeder
 			$this->command->info("good {$name} skiped");
 		}
 
-		$this->seedGoodAttributes($path.'/attributes.json', $good);
-		$this->seedGoodOptions($path.'/options.json', $good);
-		$this->seedGoodMedias($path.'/images', $good);
+		if (File::exists($attributesFile = $path.'/attributes.json')) {
+			$this->seedGoodAttributes($attributesFile, $good);
+		}
+
+		if (File::exists($optionsFile = $path.'/options.json')) {
+			$this->seedGoodOptions($optionsFile, $good);
+		}
+
+		if (File::exists($imagesPath = $path.'/images')) {
+			$this->seedGoodMedias($imagesPath, $good);
+		}
+
+		if (File::exists($variantsFile = $path.'/variants.json')) {
+			$this->seedGoodVariants($variantsFile, $good);
+		}
 
 		return $good;
 	}
@@ -217,15 +235,14 @@ class Seeder
 	 */
 	protected function seedGoodAttributes($path, Good $good)
 	{
-		if (File::exists($path)) {
-			$attributes = $this->getJson($path);
-			foreach ($attributes as $attribute) {
-				if (isset($attribute['key']) AND isset($attribute['value'])) {
-					$good->attributes()->firstOrCreate([
-						'key' => $attribute['key'],
-						'value' => $attribute['value']
-					]);
-				}
+		$attributes = $this->getJson($path);
+		
+		foreach ($attributes as $attribute) {
+			if (isset($attribute['key'], $attribute['value'])) {
+				$good->attributes()->firstOrCreate([
+					'key' => $attribute['key'],
+					'value' => $attribute['value']
+				]);
 			}
 		}
 	}
@@ -239,16 +256,15 @@ class Seeder
 	 */
 	protected function seedGoodOptions($path, Good $good)
 	{
-		if (File::exists($path)) {
-			$options = $this->getJson($path);
-			foreach ($options as $option) {
-				if (isset($option['name'])) {
-					$opt = $good->options()->firstOrCreate(['name' => $option['name']]);
-					if (isset($option['items'])) {
-						foreach ($option['items'] as $item) {
-							if (isset($item['name'])) {
-								$opt->goodOptionItems()->firstOrCreate(['name' => $item['name']]);
-							}
+		$options = $this->getJson($path);
+		
+		foreach ($options as $option) {
+			if (isset($option['name'])) {
+				$opt = $good->options()->firstOrCreate(['name' => $option['name']]);
+				if (isset($option['items'])) {
+					foreach ($option['items'] as $item) {
+						if (isset($item['name'])) {
+							$opt->goodOptionItems()->firstOrCreate(['name' => $item['name']]);
 						}
 					}
 				}
@@ -265,21 +281,91 @@ class Seeder
 	 */
 	protected function seedGoodMedias($path, Good $good)
 	{
-		if (File::exists($path) AND $good->medias()->count() === 0) {
-			$images = $this->getGoodImagesFilePath($path);
-			foreach ($images as $index => $filePath) {
-				$filePaths = explode('.', $filePath);
-				$fileName = $this->generateFilename($path, end($filePaths));
-				$imagePath = $this->imageGoodPath .'/'. $fileName;
-				$this->saveImageFile($filePath, base_path('media/' . $imagePath));
-				$good->medias()->firstOrCreate([
-					'type' => 'image',
-					'content' => $imagePath,
-					'sequence' => $index + 1,
-					'primary' => $index === 0
+		if ($good->medias()->count() > 0) return;
+
+		$images = $this->getGoodImagesFilePath($path);
+		
+		foreach ($images as $index => $filePath) {
+			$filePaths = explode('.', $filePath);
+			$fileName = $this->generateFilename($path, end($filePaths));
+			$imagePath = $this->imageGoodPath .'/'. $fileName;
+			$this->saveImageFile($filePath, base_path('media/' . $imagePath));
+			$good->medias()->firstOrCreate([
+				'type' => 'image',
+				'content' => $imagePath,
+				'sequence' => $index + 1,
+				'primary' => $index === 0
+			]);
+		}
+	}
+
+	/**
+	 * seed good variants
+	 *
+	 * @param string $path
+	 * @param Good $good
+	 * @return void
+	 */
+	protected function seedGoodVariants($path, Good $good)
+	{
+		$name = $good->name;
+		$variants = $this->getJson($path);
+		
+		foreach ($variants as $variant) {
+			if (isset($variant['options'], $variant['unit_id'], $variant['enabled'],
+				$variant['min_order'], $variant['order_multiples'])) {
+				$options = $this->getGoodOptions($variant['options'], $good);
+
+				if (count($options) > 0) {
+					$name = implode(' ', $options->pluck('name')->toArray());
+				}
+
+				$var = $good->variants()->firstOrCreate([
+					'name' => $name,
+					'unit_id' => $variant['unit_id'],
+					'enabled' => $variant['enabled'],
+					'min_order' => $variant['min_order'],
+					'order_multiples' => $variant['order_multiples']
 				]);
+
+				$var->goodOptionItems()->sync($options->pluck('id')->toArray());
+
+
+				if (isset($variant['base_price'])) {
+					$var->goodPrices()->firstOrCreate(['price' => $variant['base_price']]);
+				}
+
+				if (isset($variant['chanel_prices']) AND is_array($variant['chanel_prices'])) {
+					foreach ($variant['chanel_prices'] as $chanelPrice) {
+						if (!isset($chanelPrice['chanel_id']) OR !isset($chanelPrice['price'])) continue;
+						$var->goodPrices()->firstOrCreate([
+							'chanel_id' => $chanelPrice['chanel_id'],
+							'price' => $chanelPrice['price']
+						]);
+					}
+				}
 			}
 		}
+	}
+
+	/**
+	 * get good options
+	 *
+	 * @param array $options
+	 * @param Good $good
+	 *
+	 * @return Collection
+	 */
+	protected function getGoodOptions(array $options, Good $good)
+	{
+		if (count($options) === 0) return null;
+
+		return GoodOptionItem::whereIn('name', $options)
+		->whereHas('goodOption', function($q) use ($good) {
+			$q->whereHas('good', function($q2) use ($good) {
+				$q2->whereId($good->id);
+			});
+		})->get();
 	}
 
 	/**
