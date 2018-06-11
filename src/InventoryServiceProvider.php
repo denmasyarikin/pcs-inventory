@@ -14,6 +14,10 @@ class InventoryServiceProvider extends ServiceProvider
     public function boot()
     {
         Relation::morphMap(['good_variant' => 'Denmasyarikin\Inventory\Good\GoodVariant']);
+
+        $this->commands([
+            Commands\GoodSeed::class
+        ]);
     }
 
     /**
