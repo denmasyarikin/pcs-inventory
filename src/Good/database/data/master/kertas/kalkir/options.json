@@ -1,0 +1,16 @@
+[
+	{
+		"name": "Berat",
+		"items": [
+			{"name": "75 gr"},
+			{"name": "85 gr"}
+		]
+	}, {
+		"name": "Ukuran",
+		"items": [
+			{"name": "A4"},
+			{"name": "F4"},
+			{"name": "65 x 100"}
+		]
+	}
+]
