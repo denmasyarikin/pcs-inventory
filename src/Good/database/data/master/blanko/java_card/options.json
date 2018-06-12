@@ -1,0 +1,31 @@
+[
+	{
+		"name": "Tipe",
+		"items": [
+			{"name": "Goong"},
+			{"name": "Latte"},
+			{"name": "Heritage"},
+			{"name": "Signature"},
+			{"name": "Vintage"},
+			{"name": "Andalas"},
+			{"name": "Borneo"},
+			{"name": "Brunei"},
+			{"name": "Bunga"},
+			{"name": "Celebas"},
+			{"name": "Indi"},
+			{"name": "Kompi"},
+			{"name": "Mild"},
+			{"name": "New Andalas"},
+			{"name": "Sunat"},
+			{"name": "Shappire"}
+		]
+	}, {
+		"name": "Nomor",
+		"items": [
+			{"name": "01"}, {"name": "02"}, {"name": "03"}, {"name": "04"}, {"name": "05"}, {"name": "06"}, {"name": "07"}, {"name": "08"}, {"name": "09"}, {"name": "10"},
+			{"name": "11"}, {"name": "12"}, {"name": "13"}, {"name": "14"}, {"name": "15"}, {"name": "16"}, {"name": "17"}, {"name": "18"}, {"name": "19"}, {"name": "20"},
+			{"name": "21"}, {"name": "22"}, {"name": "23"}, {"name": "24"}, {"name": "25"}, {"name": "26"}, {"name": "27"}, {"name": "28"}, {"name": "29"}, {"name": "30"},
+			{"name": "31"}, {"name": "32"}, {"name": "33"}, {"name": "34"}, {"name": "35"}, {"name": "36"}, {"name": "37"}, {"name": "38"}, {"name": "39"}, {"name": "40"}
+		]
+	}
+]

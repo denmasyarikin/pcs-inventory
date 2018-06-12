@@ -24,6 +24,7 @@ class GoodCategoryDetailTransformer extends Detail
             'parent_id' => $model->parent_id ? (int) $model->parent_id : null,
             'workspace_ids' => $model->workspaces->pluck('id'),
             'workspaces' => (new WorkspaceListTransformer($model->workspaces))->toArray(),
+            'good_count' => (int) $model->goods()->whereStatus('active')->count(),
             'children_count' => (int) $model->children->count(),
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $model->updated_at->format('Y-m-d H:i:s'),

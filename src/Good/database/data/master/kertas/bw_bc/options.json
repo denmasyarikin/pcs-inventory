@@ -1,0 +1,19 @@
+[
+	{
+		"name": "Type",
+		"items": [
+			{"name": "Pindo"},
+			{"name": "Super"}
+		]
+	}, {
+		"name": "Warna",
+		"items": [
+			{"name": "Putih"},
+			{"name": "Biru"},
+			{"name": "Hijau"},
+			{"name": "Pink"},
+			{"name": "Kuning"},
+			{"name": "Merah"}
+		]
+	}
+]

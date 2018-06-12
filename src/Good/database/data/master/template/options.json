@@ -1,0 +1,27 @@
+[
+	{
+		"name": "Merk",
+		"items": [
+			{"name": "Sinar Dunia"},
+			{"name": "Paper One"},
+			{"name": "Bola Dunia"}
+		]
+	}, {
+		"name": "Ukuran",
+		"items": [
+			{"name": "A5"},
+			{"name": "B5"},
+			{"name": "A4"},
+			{"name": "Q4"},
+			{"name": "F4"},
+			{"name": "A3"}
+		]
+	}, {
+		"name": "Berat",
+		"items": [
+			{"name": "70 gsm"},
+			{"name": "80 gsm"},
+			{"name": "100 gsm"}
+		]
+	}
+]
