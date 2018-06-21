@@ -1,6 +1,6 @@
 <?php
 
-namespace Denmasyarikin\Inventory\Commands;
+namespace Denmasyarikin\Inventory\Good\Commands;
 
 use Illuminate\Console\Command;
 use Denmasyarikin\Inventory\Good\Seeder\Seeder;
@@ -26,7 +26,7 @@ class GoodSeed extends Command
      */
     public function handle()
     {
-    	$seeder = new Seeder($this, __dir__ . '/../Good/database/data/master');
+    	$seeder = new Seeder($this, __dir__ . '/../database/data/master');
 
     	$seeder->seed();
     }
