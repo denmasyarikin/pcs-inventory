@@ -26,15 +26,10 @@ class GoodController extends Controller
     public function getList(Request $request)
     {
         $goods = $this->getGoodList($request, $request->get('status'));
-        $draftGoods = $this->getGoodList($request, 'draft');
 
         $transform = new GoodListTransformer($goods);
-        $transformDraft = new GoodListTransformer($draftGoods);
 
-        return new JsonResponse([
-            'data' => $transform->toArray(),
-            'draft' => $transformDraft->toArray(),
-        ]);
+        return new JsonResponse(['data' => $transform->toArray()]);
     }
 
     /**

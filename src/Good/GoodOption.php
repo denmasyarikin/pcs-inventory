@@ -21,7 +21,7 @@ class GoodOption extends Model
      */
     public function good()
     {
-        return $this->belongsTo(Good::class);
+        return $this->belongsTo(Good::class)->withTrashed();
     }
 
     /**

@@ -22,7 +22,7 @@ class GoodPrice extends Model implements Price
      */
     public function goodVariant()
     {
-        return $this->belongsTo(GoodVariant::class);
+        return $this->belongsTo(GoodVariant::class)->withTrashed();
     }
 
     /**
@@ -40,7 +40,7 @@ class GoodPrice extends Model implements Price
      */
     public function chanel()
     {
-        return $this->belongsTo('Modules\Chanel\Chanel');
+        return $this->belongsTo('Modules\Chanel\Chanel')->withTrashed();
     }
     
     /**
@@ -48,6 +48,6 @@ class GoodPrice extends Model implements Price
      */
     public function previous()
     {
-        return $this->belongsTo(static::class, 'previous_id');
+        return $this->belongsTo(static::class, 'previous_id')->withTrashed();
     }
 }

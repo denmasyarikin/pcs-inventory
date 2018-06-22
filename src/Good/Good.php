@@ -22,7 +22,7 @@ class Good extends Model
      */
     public function goodCategory()
     {
-        return $this->belongsTo(GoodCategory::class);
+        return $this->belongsTo(GoodCategory::class)->withTrashed();
     }
 
     /**

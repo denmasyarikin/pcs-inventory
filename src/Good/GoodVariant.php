@@ -22,7 +22,7 @@ class GoodVariant extends Model implements Priceable
      */
     public function good()
     {
-        return $this->belongsTo(Good::class);
+        return $this->belongsTo(Good::class)->withTrashed();
     }
 
     /**
@@ -56,6 +56,6 @@ class GoodVariant extends Model implements Priceable
      */
     public function unit()
     {
-        return $this->belongsTo('Modules\Unit\Unit');
+        return $this->belongsTo('Modules\Unit\Unit')->withTrashed();
     }
 }

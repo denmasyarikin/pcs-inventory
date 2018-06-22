@@ -30,7 +30,7 @@ class GoodCategory extends Model
      */
     public function parent()
     {
-        return $this->belongsTo(static::class);
+        return $this->belongsTo(static::class)->withTrashed();
     }
 
     /**
