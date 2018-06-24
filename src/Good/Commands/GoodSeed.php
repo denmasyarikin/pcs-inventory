@@ -7,27 +7,27 @@ use Denmasyarikin\Inventory\Good\Seeder\Seeder;
 
 class GoodSeed extends Command
 {
-	/**
-	 * name
-	 *
-	 * @var string
-	 */
+    /**
+     * name.
+     *
+     * @var string
+     */
     protected $name = 'good:seed';
 
     /**
-     * description
+     * description.
      *
      * @var string
      */
     protected $description = 'Seed master data';
-    
+
     /**
-     * handle
+     * handle.
      */
     public function handle()
     {
-    	$seeder = new Seeder($this, __dir__ . '/../database/data/master');
+        $seeder = new Seeder($this, __DIR__.'/../database/data/master');
 
-    	$seeder->seed();
+        $seeder->seed();
     }
 }

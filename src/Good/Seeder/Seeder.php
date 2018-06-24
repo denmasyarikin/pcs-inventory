@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Denmasyarikin\Inventory\Good\Seeder;
 
@@ -12,421 +12,429 @@ use Denmasyarikin\Inventory\Good\GoodOptionItem;
 
 class Seeder
 {
-	/**
-	 * command
-	 *
-	 * @var Command
-	 */
-	protected $command;
+    /**
+     * command.
+     *
+     * @var Command
+     */
+    protected $command;
 
-	/**
-	 * path
-	 *
-	 * @var string
-	 */
-	protected $path;
+    /**
+     * path.
+     *
+     * @var string
+     */
+    protected $path;
 
-	/**
-	 * image category path
-	 *
-	 * @var string
-	 */
-	protected $imageCategroyPath = 'inventory/good/category';
+    /**
+     * image category path.
+     *
+     * @var string
+     */
+    protected $imageCategroyPath = 'inventory/good/category';
 
-	/**
-	 * image good path
-	 *
-	 * @var string
-	 */
-	protected $imageGoodPath = 'inventory/good/medias';
+    /**
+     * image good path.
+     *
+     * @var string
+     */
+    protected $imageGoodPath = 'inventory/good/medias';
 
-	/**
-	 * Create a new Seeder instance.
-	 *
-	 * @param Command $command
-	 * @param string $path
-	 *
-	 * @return void
-	 */
-	public function __construct(Command $command, $path)
-	{
-		$this->command = $command;
-		$this->path = $path;
-	}
+    /**
+     * Create a new Seeder instance.
+     *
+     * @param Command $command
+     * @param string  $path
+     */
+    public function __construct(Command $command, $path)
+    {
+        $this->command = $command;
+        $this->path = $path;
+    }
 
-	/**
-	 * seed
-	 */
-	public function seed()
-	{
-		$this->command->info('Seeding data good');
+    /**
+     * seed.
+     */
+    public function seed()
+    {
+        $this->command->info('Seeding data good');
 
-		if (!File::exists($this->path)) {
-			$this->command->error('No directory found');
-		}
+        if (!File::exists($this->path)) {
+            $this->command->error('No directory found');
+        }
 
-		$this->seedDirectories(
-			$this->getDirectories($this->path)
-		);
-	}
+        $this->seedDirectories(
+            $this->getDirectories($this->path)
+        );
+    }
 
-	/**
-	 * get all directories
-	 *
-	 * @param string $path
-	 * @return array
-	 */
-	protected function getDirectories($path)
-	{
-		return File::directories($path);
-	}
+    /**
+     * get all directories.
+     *
+     * @param string $path
+     *
+     * @return array
+     */
+    protected function getDirectories($path)
+    {
+        return File::directories($path);
+    }
 
-	/**
-	 * seed directories
-	 *
-	 * @param array $dirs
-	 * @param GoodCategory $parent
-	 * @return void
-	 */
-	protected function seedDirectories(array $dirs, GoodCategory $parent = null)
-	{
-		if (count($dirs) === 0) return;
-		
-		$categories = [];
+    /**
+     * seed directories.
+     *
+     * @param array        $dirs
+     * @param GoodCategory $parent
+     */
+    protected function seedDirectories(array $dirs, GoodCategory $parent = null)
+    {
+        if (0 === count($dirs)) {
+            return;
+        }
 
-		foreach ($dirs as $dir) {
-			if ($this->isGood($dir)) {
-				$this->seedGood($dir, $parent);
-			}
+        $categories = [];
 
-			if ($this->isCategory($dir)) {
-				$categories[$dir] = $this->seedCategory($dir, $parent);
-			}
-		}
+        foreach ($dirs as $dir) {
+            if ($this->isGood($dir)) {
+                $this->seedGood($dir, $parent);
+            }
 
-		foreach ($categories as $path => $category) {
-			$this->seedDirectories(
-				$this->getDirectories($path), $category
-			);
-		}
-	}
+            if ($this->isCategory($dir)) {
+                $categories[$dir] = $this->seedCategory($dir, $parent);
+            }
+        }
 
-	/**
-	 * determin is category
-	 *
-	 * @param string $path
-	 * @return bool
-	 */
-	protected function isCategory($path)
-	{
-		return !$this->isGood($path);
-	}
+        foreach ($categories as $path => $category) {
+            $this->seedDirectories(
+                $this->getDirectories($path), $category
+            );
+        }
+    }
 
-	/**
-	 * determin is good
-	 *
-	 * @param string $path
-	 * @return bool
-	 */
-	protected function isGood($path)
-	{
-		return File::exists($path.'/good.json');
-	}
+    /**
+     * determin is category.
+     *
+     * @param string $path
+     *
+     * @return bool
+     */
+    protected function isCategory($path)
+    {
+        return !$this->isGood($path);
+    }
 
-	/**
-	 * seed category
-	 *
-	 * @param string $path
-	 * @param GoodCategory $parent
-	 *
-	 * @return Category $category
-	 */
-	protected function seedCategory($path, GoodCategory $parent = null)
-	{
-		$name = $this->getNameFromPath($path);
-		$data = ['name' => $name];
+    /**
+     * determin is good.
+     *
+     * @param string $path
+     *
+     * @return bool
+     */
+    protected function isGood($path)
+    {
+        return File::exists($path.'/good.json');
+    }
 
-		if (!is_null($parent)) {
-			$data['parent_id'] = $parent->id;
-		}
+    /**
+     * seed category.
+     *
+     * @param string       $path
+     * @param GoodCategory $parent
+     *
+     * @return Category $category
+     */
+    protected function seedCategory($path, GoodCategory $parent = null)
+    {
+        $name = $this->getNameFromPath($path);
+        $data = ['name' => $name];
 
-		$category = GoodCategory::firstOrNew($data);
+        if (!is_null($parent)) {
+            $data['parent_id'] = $parent->id;
+        }
 
-		if (is_null($category->image)) {
-			$category->image = $this->generateCategoryImagePath($path);
-		}
+        $category = GoodCategory::firstOrNew($data);
 
-		if ($category->isDirty()) {
-			$category->save();
-			$category->Workspaces()->sync(Workspace::get()->pluck('id'));
-			$this->command->info("Category {$name} seeded");
-		} else {
-			$this->command->info("Category {$name} skiped");
-		}
+        if (is_null($category->image)) {
+            $category->image = $this->generateCategoryImagePath($path);
+        }
 
-		return $category;
-	}
+        if ($category->isDirty()) {
+            $category->save();
+            $category->Workspaces()->sync(Workspace::get()->pluck('id'));
+            $this->command->info("Category {$name} seeded");
+        } else {
+            $this->command->info("Category {$name} skiped");
+        }
 
-	/**
-	 * seed good
-	 *
-	 * @param string $path
-	 * @param GoodCategory $category
-	 *
-	 * @return Good $good
-	 */
-	protected function seedGood($path, GoodCategory $category = null)
-	{
-		$name = $this->getNameFromPath($path);
+        return $category;
+    }
 
-		if ($name === 'Template') {
-			return;
-		}
+    /**
+     * seed good.
+     *
+     * @param string       $path
+     * @param GoodCategory $category
+     *
+     * @return Good $good
+     */
+    protected function seedGood($path, GoodCategory $category = null)
+    {
+        $name = $this->getNameFromPath($path);
 
-		$data = ['name' => $name];
-		
-		if (!is_null($category)) {
-			$data['good_category_id'] = $category->id;
-		}
+        if ('Template' === $name) {
+            return;
+        }
 
-		$good = $this->getJson($path . '/good.json');
+        $data = ['name' => $name];
 
-		foreach (['description', 'status'] as $field) {
-			if (isset($good[$field])) {
-				$data[$field] = $good[$field];
-			}
-		}
+        if (!is_null($category)) {
+            $data['good_category_id'] = $category->id;
+        }
 
-		$good = Good::firstOrNew($data);
+        $good = $this->getJson($path.'/good.json');
 
-		if ($good->isDirty()) {
-			$good->save();
-			$good->Workspaces()->sync(Workspace::get()->pluck('id'));
-			$this->command->info("good {$name} seeded");
-		} else {
-			$this->command->info("good {$name} skiped");
-		}
+        foreach (['description', 'status'] as $field) {
+            if (isset($good[$field])) {
+                $data[$field] = $good[$field];
+            }
+        }
 
-		if (File::exists($attributesFile = $path.'/attributes.json')) {
-			$this->seedGoodAttributes($attributesFile, $good);
-		}
+        $good = Good::firstOrNew($data);
 
-		if (File::exists($optionsFile = $path.'/options.json')) {
-			$this->seedGoodOptions($optionsFile, $good);
-		}
+        if ($good->isDirty()) {
+            $good->save();
+            $good->Workspaces()->sync(Workspace::get()->pluck('id'));
+            $this->command->info("good {$name} seeded");
+        } else {
+            $this->command->info("good {$name} skiped");
+        }
 
-		if (File::exists($imagesPath = $path.'/images')) {
-			$this->seedGoodMedias($imagesPath, $good);
-		}
+        if (File::exists($attributesFile = $path.'/attributes.json')) {
+            $this->seedGoodAttributes($attributesFile, $good);
+        }
 
-		if (File::exists($variantsFile = $path.'/variants.json')) {
-			$this->seedGoodVariants($variantsFile, $good);
-		}
+        if (File::exists($optionsFile = $path.'/options.json')) {
+            $this->seedGoodOptions($optionsFile, $good);
+        }
 
-		return $good;
-	}
+        if (File::exists($imagesPath = $path.'/images')) {
+            $this->seedGoodMedias($imagesPath, $good);
+        }
 
-	/**
-	 * seed good attributes
-	 *
-	 * @param string $path
-	 * @param Good $good
-	 * @return void
-	 */
-	protected function seedGoodAttributes($path, Good $good)
-	{
-		$attributes = $this->getJson($path);
-		
-		foreach ($attributes as $attribute) {
-			if (isset($attribute['key'], $attribute['value'])) {
-				$good->attributes()->firstOrCreate([
-					'key' => $attribute['key'],
-					'value' => $attribute['value']
-				]);
-			}
-		}
-	}
+        if (File::exists($variantsFile = $path.'/variants.json')) {
+            $this->seedGoodVariants($variantsFile, $good);
+        }
 
-	/**
-	 * seed good options
-	 *
-	 * @param string $path
-	 * @param Good $good
-	 * @return void
-	 */
-	protected function seedGoodOptions($path, Good $good)
-	{
-		$options = $this->getJson($path);
-		
-		foreach ($options as $option) {
-			if (isset($option['name'])) {
-				$opt = $good->options()->firstOrCreate(['name' => $option['name']]);
-				if (isset($option['items'])) {
-					foreach ($option['items'] as $item) {
-						if (isset($item['name'])) {
-							$opt->goodOptionItems()->firstOrCreate(['name' => $item['name']]);
-						}
-					}
-				}
-			}
-		}
-	}
+        return $good;
+    }
 
-	/**
-	 * seed good medias
-	 *
-	 * @param string $path
-	 * @param Good $good
-	 * @return void
-	 */
-	protected function seedGoodMedias($path, Good $good)
-	{
-		if ($good->medias()->count() > 0) return;
+    /**
+     * seed good attributes.
+     *
+     * @param string $path
+     * @param Good   $good
+     */
+    protected function seedGoodAttributes($path, Good $good)
+    {
+        $attributes = $this->getJson($path);
 
-		$images = $this->getGoodImagesFilePath($path);
-		
-		foreach ($images as $index => $filePath) {
-			$filePaths = explode('.', $filePath);
-			$fileName = $this->generateFilename($path, end($filePaths));
-			$imagePath = $this->imageGoodPath .'/'. $fileName;
-			$this->saveImageFile($filePath, base_path('media/' . $imagePath));
-			$good->medias()->firstOrCreate([
-				'type' => 'image',
-				'content' => $imagePath,
-				'sequence' => $index + 1,
-				'primary' => $index === 0
-			]);
-		}
-	}
+        foreach ($attributes as $attribute) {
+            if (isset($attribute['key'], $attribute['value'])) {
+                $good->attributes()->firstOrCreate([
+                    'key' => $attribute['key'],
+                    'value' => $attribute['value'],
+                ]);
+            }
+        }
+    }
 
-	/**
-	 * seed good variants
-	 *
-	 * @param string $path
-	 * @param Good $good
-	 * @return void
-	 */
-	protected function seedGoodVariants($path, Good $good)
-	{
-		$name = $good->name;
-		$variants = $this->getJson($path);
-		
-		foreach ($variants as $variant) {
-			if (isset($variant['options'], $variant['unit_id'], $variant['enabled'],
-				$variant['min_order'], $variant['order_multiples'])) {
-				$options = $this->getGoodOptions($variant['options'], $good);
+    /**
+     * seed good options.
+     *
+     * @param string $path
+     * @param Good   $good
+     */
+    protected function seedGoodOptions($path, Good $good)
+    {
+        $options = $this->getJson($path);
 
-				if (count($options) > 0) {
-					$name = implode(' ', $options->pluck('name')->toArray());
-				}
+        foreach ($options as $option) {
+            if (isset($option['name'])) {
+                $opt = $good->options()->firstOrCreate(['name' => $option['name']]);
+                if (isset($option['items'])) {
+                    foreach ($option['items'] as $item) {
+                        if (isset($item['name'])) {
+                            $opt->goodOptionItems()->firstOrCreate(['name' => $item['name']]);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-				$var = $good->variants()->firstOrCreate([
-					'name' => $name,
-					'unit_id' => $variant['unit_id'],
-					'enabled' => $variant['enabled'],
-					'min_order' => $variant['min_order'],
-					'order_multiples' => $variant['order_multiples']
-				]);
+    /**
+     * seed good medias.
+     *
+     * @param string $path
+     * @param Good   $good
+     */
+    protected function seedGoodMedias($path, Good $good)
+    {
+        if ($good->medias()->count() > 0) {
+            return;
+        }
 
-				$var->goodOptionItems()->sync($options->pluck('id')->toArray());
+        $images = $this->getGoodImagesFilePath($path);
 
+        foreach ($images as $index => $filePath) {
+            $filePaths = explode('.', $filePath);
+            $fileName = $this->generateFilename($path, end($filePaths));
+            $imagePath = $this->imageGoodPath.'/'.$fileName;
+            $this->saveImageFile($filePath, base_path('media/'.$imagePath));
+            $good->medias()->firstOrCreate([
+                'type' => 'image',
+                'content' => $imagePath,
+                'sequence' => $index + 1,
+                'primary' => 0 === $index,
+            ]);
+        }
+    }
 
-				if (isset($variant['base_price'])) {
-					$var->goodPrices()->firstOrCreate(['price' => $variant['base_price']]);
-				}
+    /**
+     * seed good variants.
+     *
+     * @param string $path
+     * @param Good   $good
+     */
+    protected function seedGoodVariants($path, Good $good)
+    {
+        $name = $good->name;
+        $variants = $this->getJson($path);
 
-				if (isset($variant['chanel_prices']) AND is_array($variant['chanel_prices'])) {
-					foreach ($variant['chanel_prices'] as $chanelPrice) {
-						if (!isset($chanelPrice['chanel_id']) OR !isset($chanelPrice['price'])) continue;
-						$var->goodPrices()->firstOrCreate([
-							'chanel_id' => $chanelPrice['chanel_id'],
-							'price' => $chanelPrice['price']
-						]);
-					}
-				}
-			}
-		}
-	}
+        foreach ($variants as $variant) {
+            if (isset($variant['options'], $variant['unit_id'], $variant['enabled'],
+                $variant['min_order'], $variant['order_multiples'])) {
+                $options = $this->getGoodOptions($variant['options'], $good);
 
-	/**
-	 * get good options
-	 *
-	 * @param array $options
-	 * @param Good $good
-	 *
-	 * @return Collection
-	 */
-	protected function getGoodOptions(array $options, Good $good)
-	{
-		if (count($options) === 0) return null;
+                if (count($options) > 0) {
+                    $name = implode(' ', $options->pluck('name')->toArray());
+                }
 
-		return GoodOptionItem::whereIn('name', $options)
-		->whereHas('goodOption', function($q) use ($good) {
-			$q->whereHas('good', function($q2) use ($good) {
-				$q2->whereId($good->id);
-			});
-		})->get();
-	}
+                $var = $good->variants()->firstOrCreate([
+                    'name' => $name,
+                    'unit_id' => $variant['unit_id'],
+                    'enabled' => $variant['enabled'],
+                    'min_order' => $variant['min_order'],
+                    'order_multiples' => $variant['order_multiples'],
+                ]);
 
-	/**
-	 * get name from path
-	 *
-	 * @param string $path
-	 * @return string
-	 */
-	protected function getNameFromPath($path)
-	{
-		$paths = explode('/', $path);
+                $var->goodOptionItems()->sync($options->pluck('id')->toArray());
 
-		return str_replace('_', ' ', Str::title(end($paths)));
-	}
+                if (isset($variant['base_price'])) {
+                    $var->goodPrices()->firstOrCreate(['price' => $variant['base_price']]);
+                }
 
-	/**
-	 * get category image file path
-	 *
-	 * @param string $path
-	 * @return string
-	 */
-	protected function getCategoryImageFilePath($path)
-	{
-		$files = glob("{$path}/image.*");
+                if (isset($variant['chanel_prices']) and is_array($variant['chanel_prices'])) {
+                    foreach ($variant['chanel_prices'] as $chanelPrice) {
+                        if (!isset($chanelPrice['chanel_id']) or !isset($chanelPrice['price'])) {
+                            continue;
+                        }
+                        $var->goodPrices()->firstOrCreate([
+                            'chanel_id' => $chanelPrice['chanel_id'],
+                            'price' => $chanelPrice['price'],
+                        ]);
+                    }
+                }
+            }
+        }
+    }
 
-		if (count($files) > 0) {
-			return $files[0];
-		}
-	}
+    /**
+     * get good options.
+     *
+     * @param array $options
+     * @param Good  $good
+     *
+     * @return Collection
+     */
+    protected function getGoodOptions(array $options, Good $good)
+    {
+        if (0 === count($options)) {
+            return null;
+        }
 
-	/**
-	 * get good images file path
-	 *
-	 * @param string $path
-	 * @return array
-	 */
-	protected function getGoodImagesFilePath($path)
-	{
-		return glob("{$path}/*.*");
-	}
+        return GoodOptionItem::whereIn('name', $options)
+        ->whereHas('goodOption', function ($q) use ($good) {
+            $q->whereHas('good', function ($q2) use ($good) {
+                $q2->whereId($good->id);
+            });
+        })->get();
+    }
 
-	/**
-	 * generate category image path
-	 *
-	 * @param stirng $path
-	 * @return string
-	 */
-	protected function generateCategoryImagePath($path)
-	{
-		$filePath = $this->getCategoryImageFilePath($path);
-		
-		if (!is_null($filePath)) {
-			$filePaths = explode('.', $filePath);
-			$fileName = $this->generateFilename($path, end($filePaths));
-			$imagePath = $this->imageCategroyPath .'/'. $fileName;
-			$this->saveImageFile($filePath, base_path('media/' . $imagePath));
-			return $imagePath;
-		}
-	}
+    /**
+     * get name from path.
+     *
+     * @param string $path
+     *
+     * @return string
+     */
+    protected function getNameFromPath($path)
+    {
+        $paths = explode('/', $path);
 
-	/**
+        return str_replace('_', ' ', Str::title(end($paths)));
+    }
+
+    /**
+     * get category image file path.
+     *
+     * @param string $path
+     *
+     * @return string
+     */
+    protected function getCategoryImageFilePath($path)
+    {
+        $files = glob("{$path}/image.*");
+
+        if (count($files) > 0) {
+            return $files[0];
+        }
+    }
+
+    /**
+     * get good images file path.
+     *
+     * @param string $path
+     *
+     * @return array
+     */
+    protected function getGoodImagesFilePath($path)
+    {
+        return glob("{$path}/*.*");
+    }
+
+    /**
+     * generate category image path.
+     *
+     * @param stirng $path
+     *
+     * @return string
+     */
+    protected function generateCategoryImagePath($path)
+    {
+        $filePath = $this->getCategoryImageFilePath($path);
+
+        if (!is_null($filePath)) {
+            $filePaths = explode('.', $filePath);
+            $fileName = $this->generateFilename($path, end($filePaths));
+            $imagePath = $this->imageCategroyPath.'/'.$fileName;
+            $this->saveImageFile($filePath, base_path('media/'.$imagePath));
+
+            return $imagePath;
+        }
+    }
+
+    /**
      * generate image name.
      *
      * @param string $path
@@ -447,41 +455,41 @@ class Seeder
     }
 
     /**
-     * save image file
+     * save image file.
      *
      * @param string $from
      * @param string $to
-     * @return void
      */
     protected function saveImageFile($from, $to)
     {
-    	try {
-    		$dirs = explode('/', $to);
-    		
-    		array_pop($dirs);
-    		
-    		if (!File::exists($path = implode('/', $dirs))) {
-    			File::makeDirectory($path, 0755, true);
-    		}
+        try {
+            $dirs = explode('/', $to);
 
-    		File::copy($from, $to);
-    	} catch (\Exception $e) {
-    		$this->command->error("Error Move File {$e->getMessage()}");
-    	}
+            array_pop($dirs);
+
+            if (!File::exists($path = implode('/', $dirs))) {
+                File::makeDirectory($path, 0755, true);
+            }
+
+            File::copy($from, $to);
+        } catch (\Exception $e) {
+            $this->command->error("Error Move File {$e->getMessage()}");
+        }
     }
 
     /**
-     * get json
+     * get json.
      *
      * @param string $file
+     *
      * @return array
      */
     protected function getJson($file)
     {
-    	try {
-    		return json_decode(File::get($file), true);
-    	} catch (\Exception $e) {
-    		$this->command->error("Error reading file {$e->getMessage()}");
-    	}
+        try {
+            return json_decode(File::get($file), true);
+        } catch (\Exception $e) {
+            $this->command->error("Error reading file {$e->getMessage()}");
+        }
     }
 }
