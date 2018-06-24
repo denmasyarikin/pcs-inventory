@@ -1,0 +1,16 @@
+[
+	{
+		"name": "Ukuran",
+		"items": [
+			{"name": "109 X 79"},
+			{"name": "65 X 100"}
+		]
+	}, {
+		"name": "Berat",
+		"items": [
+			{"name": "85 gr"},
+			{"name": "120 gr"},
+			{"name": "150 gr"}
+		]
+	}
+]

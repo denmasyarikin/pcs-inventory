@@ -1,0 +1,23 @@
+[
+	{
+		"name": "Merk",
+		"items": [
+			{"name": "Jaya"},
+			{"name": "Paperline"}
+		]
+	}, {
+		"name": "Ukuran",
+		"items": [
+			{"name": "90"},
+			{"name": "104"},
+			{"name": "110"},
+			{"name": "Folio"}
+		]
+	}, {
+		"name": "Warna",
+		"items": [
+			{"name": "Puthi"},
+			{"name": "Coklat"}
+		]
+	}
+]

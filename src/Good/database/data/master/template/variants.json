@@ -1,0 +1,36 @@
+[
+	{
+		"options": ["Sinar Dunia", "A4", "70 gsm"],
+		"unit_id": 17,
+		"enabled": true,
+		"min_order": 1,
+		"order_multiples": 1,
+		"base_price": 20000,
+		"chanel_prices": [
+			{
+				"chanel_id": 1,
+				"price": 30000
+			}, {
+				"chanel_id": 2,
+				"price": 29000
+			}
+		]
+	},
+	{
+		"options": ["Sinar Dunia", "A4s", "70 gsm"],
+		"unit_id": 17,
+		"enabled": true,
+		"min_order": 1,
+		"order_multiples": 1,
+		"base_price": 20000,
+		"chanel_prices": [
+			{
+				"chanel_id": 1,
+				"price": 30000
+			}, {
+				"chanel_id": 2,
+				"price": 29000
+			}
+		]
+	}
+]

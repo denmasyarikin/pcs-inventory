@@ -2,4 +2,4 @@
 Inventory Printing Company System
 
 ## Module List
-- 01 Inventory Management
+- 01 Good Management

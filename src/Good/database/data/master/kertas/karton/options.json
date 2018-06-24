@@ -1,0 +1,47 @@
+[
+	{
+		"name": "Type",
+		"items": [
+			{"name": "Gloria"},
+			{"name": "Duplek"},
+			{"name": "Linen"},
+			{"name": "Hawaii"},
+			{"name": "Concord"},
+			{"name": "Daisy"},
+			{"name": "Jasmine"},
+			{"name": "Wangi"},
+			{"name": "Bufalo"},
+			{"name": "Tik"},
+			{"name": "Ivory"},
+			{"name": "Lavenda"},
+			{"name": "Fancy"}
+		]
+	}, {
+		"name": "Berat",
+		"items": [
+			{"name": "60 gr"},
+			{"name": "70 gr"},
+			{"name": "235 gr"},
+			{"name": "250 gr"},
+			{"name": "310 gr"},
+			{"name": "400 gr"}
+		]
+	}, {
+		"name": "Warna",
+		"items": [
+			{"name": "Putih"},
+			{"name": "Biru"},
+			{"name": "Hijau"},
+			{"name": "Pink"},
+			{"name": "Kuning"},
+			{"name": "Merah"},
+			{"name": "Hitam"},
+			{"name": "Gold"},
+			{"name": "Violet"},
+			{"name": "Ungu"},
+			{"name": "Coklat"},
+			{"name": "Abu-abu"},
+			{"name": "Silver"}
+		]
+	}
+]

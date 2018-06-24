@@ -1,0 +1,23 @@
+[
+	{
+		"name": "Merk",
+		"items": [
+			{"name": "Oracal"},
+			{"name": "3M"}
+		]
+	}, {
+		"name": "Warna",
+		"items": [
+			{"name": "Merah"},
+			{"name": "Silver"},
+			{"name": "Putih"},
+			{"name": "Orange"},
+			{"name": "Kuning"},
+			{"name": "Biru"},
+			{"name": "Hijau"},
+			{"name": "Hitam"},
+			{"name": "Coklat"},
+			{"name": "Gold"}
+		]
+	}
+]
