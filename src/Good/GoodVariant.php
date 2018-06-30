@@ -26,6 +26,14 @@ class GoodVariant extends Model implements Priceable
     }
 
     /**
+     * Get the medias record associated with the Good.
+     */
+    public function medias()
+    {
+        return $this->hasMany(GoodVariantMedia::class);
+    }
+
+    /**
      * Get the goodOptionItems record associated with the GoodVariant.
      */
     public function goodOptionItems()
@@ -57,5 +65,25 @@ class GoodVariant extends Model implements Priceable
     public function unit()
     {
         return $this->belongsTo('Modules\Unit\Unit')->withTrashed();
+    }
+
+    /**
+     * Get Image.
+     *
+     * @return string
+     */
+    public function getImageAttribute()
+    {
+        if (0 === count($medias = $this->medias)) {
+            return null;
+        }
+
+        $primary = $medias->where('primary', true)->first();
+
+        if (is_null($primary)) {
+            $primary = $medias->first();
+        }
+
+        return $primary->content;
     }
 }

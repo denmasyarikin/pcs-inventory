@@ -50,14 +50,14 @@ class GoodPriceController extends Controller
 
         $calculator = new GoodPriceCalculator($goodVariant);
         $defaultPrice = null;
-        
+
         if (null !== $request->chanel_id) {
             $chanel = Chanel::whereStatus('active')->find(intval($request->chanel_id));
             if (!is_null($chanel)) {
                 $defaultPrice = $calculator->getChanelPrice($chanel);
             }
         }
-        
+
         if ($defaultPrice) {
             $data['previous_id'] = $defaultPrice->id;
             $data['change_type'] = $request->price > $defaultPrice->price ? 'up' : 'down';
@@ -136,7 +136,7 @@ class GoodPriceController extends Controller
      * check is service variant price exist.
      *
      * @param GoodVariant $goodVariant
-     * @param mixed      $chanelId
+     * @param mixed       $chanelId
      */
     protected function checkIsVariantPriceExist(GoodVariant $goodVariant, $chanelId = null)
     {

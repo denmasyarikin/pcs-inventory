@@ -5,7 +5,7 @@ namespace Denmasyarikin\Inventory\Good\Transformers;
 use App\Http\Transformers\Detail;
 use Illuminate\Database\Eloquent\Model;
 
-class GoodMediaDetailTransformer extends Detail
+class GoodVariantMediaDetailTransformer extends Detail
 {
     /**
      * get data.

@@ -9,9 +9,9 @@ $router->get('/{id}', ['as' => 'inventory.good.detail', 'uses' => 'GoodControlle
 $router->get('/{id}/'.(RE ? 'attribute' : '0004'), ['as' => 'inventory.good.attribute.list', 'uses' => 'GoodAttributeController@getList']);
 $router->get('/{id}/'.(RE ? 'option' : '0005'), ['as' => 'inventory.good.option.list', 'uses' => 'GoodOptionController@getList']);
 $router->get('/{id}/'.(RE ? 'option' : '0005').'/{option_id}/item', ['as' => 'inventory.good.option.item.list', 'uses' => 'GoodOptionItemController@getList']);
-$router->get('/{id}/'.(RE ? 'media' : '0007'), ['as' => 'inventory.good.media.list', 'uses' => 'GoodMediaController@getList']);
 $router->get('/{id}/'.(RE ? 'variant' : '0002'), ['as' => 'inventory.good.variant.list', 'uses' => 'GoodVariantController@getList']);
 $router->get('/{id}/'.(RE ? 'variant' : '0002').'/{variant_id}/'.(RE ? 'price' : '0003'), ['as' => 'inventory.good.variant.price.list', 'uses' => 'GoodPriceController@getList']);
+$router->get('/{id}/variant/{variant_id}/'.(RE ? 'media' : '0007'), ['as' => 'inventory.good.variant.media.list', 'uses' => 'GoodVariantMediaController@getList']);
 
 $router->group(['middleware' => 'manage:inventory,good,write'], function ($router) {
     $router->post((RE ? 'category' : '0001'), ['as' => 'inventory.good.category.create', 'uses' => 'GoodCategoryController@createCategory']);
@@ -38,22 +38,23 @@ $router->group(['middleware' => 'manage:inventory,good,write'], function ($route
         });
     });
 
-    $router->group(['prefix' => '/{id}/'.(RE ? 'media' : '0007')], function ($router) {
-        $router->post('/', ['as' => 'inventory.good.media.create', 'uses' => 'GoodMediaController@createMedia']);
-        $router->put('/{media_id}', ['as' => 'inventory.good.media.update', 'uses' => 'GoodMediaController@updateMedia']);
-        $router->put('/{media_id}/'.(RE ? 'primary' : '0008'), ['as' => 'inventory.good.media.update_primary', 'uses' => 'GoodMediaController@updateMediaPrimary']);
-        $router->delete('/{media_id}', ['as' => 'inventory.good.media.delete', 'uses' => 'GoodMediaController@deleteMedia']);
-    });
-
     $router->group(['prefix' => '/{id}/'.(RE ? 'variant' : '0002')], function ($router) {
         $router->post('/', ['as' => 'inventory.good.variant.create', 'uses' => 'GoodVariantController@createVariant']);
         $router->put('/{variant_id}', ['as' => 'inventory.good.variant.update', 'uses' => 'GoodVariantController@updateVariant']);
         $router->delete('/{variant_id}', ['as' => 'inventory.good.variant.delete', 'uses' => 'GoodVariantController@deleteVariant']);
-
+        
         $router->group(['prefix' => '/{variant_id}/'.(RE ? 'price' : '0003')], function ($router) {
             $router->post('/', ['as' => 'inventory.good.variant.price.create', 'uses' => 'GoodPriceController@createPrice']);
             $router->put('/{price_id}', ['as' => 'inventory.good.variant.price.update', 'uses' => 'GoodPriceController@updatePrice']);
             $router->delete('{price_id}', ['as' => 'inventory.good.variant.price.delete', 'uses' => 'GoodPriceController@deletePrice']);
         });
+
+        $router->group(['prefix' => '/{variant_id}/'.(RE ? 'media' : '0007')], function ($router) {
+            $router->post('/', ['as' => 'inventory.good.variant.media.create', 'uses' => 'GoodVariantMediaController@createMedia']);
+            $router->put('/{media_id}', ['as' => 'inventory.good.variant.media.update', 'uses' => 'GoodVariantMediaController@updateMedia']);
+            $router->put('/{media_id}/'.(RE ? 'primary' : '0008'), ['as' => 'inventory.good.variant.media.update_primary', 'uses' => 'GoodVariantMediaController@updateMediaPrimary']);
+            $router->delete('/{media_id}', ['as' => 'inventory.good.variant.media.delete', 'uses' => 'GoodVariantMediaController@deleteMedia']);
+        });
+
     });
 });

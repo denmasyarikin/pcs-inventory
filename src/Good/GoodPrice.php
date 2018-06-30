@@ -42,7 +42,7 @@ class GoodPrice extends Model implements Price
     {
         return $this->belongsTo('Modules\Chanel\Chanel')->withTrashed();
     }
-    
+
     /**
      * Get the previous record associated with the GoodPrice.
      */

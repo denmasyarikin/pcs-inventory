@@ -50,38 +50,10 @@ class Good extends Model
     }
 
     /**
-     * Get the medias record associated with the Good.
-     */
-    public function medias()
-    {
-        return $this->hasMany(GoodMedia::class);
-    }
-
-    /**
      * Get the workspaces record associated with the Good.
      */
     public function workspaces()
     {
         return $this->belongsToMany('Modules\Workspace\Workspace', 'inventory_good_workspaces')->whereStatus('active')->withTimestamps();
-    }
-
-    /**
-     * Get Image.
-     *
-     * @return string
-     */
-    public function getImageAttribute()
-    {
-        if (0 === count($medias = $this->medias)) {
-            return null;
-        }
-
-        $primary = $medias->where('primary', true)->first();
-
-        if (is_null($primary)) {
-            $primary = $medias->first();
-        }
-
-        return $primary->content;
     }
 }

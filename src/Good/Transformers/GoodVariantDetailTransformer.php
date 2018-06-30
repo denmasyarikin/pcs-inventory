@@ -23,6 +23,7 @@ class GoodVariantDetailTransformer extends Detail
         return [
             'id' => $model->id,
             'name' => $model->name,
+            'image' => $model->image,
             'good' => (new GoodDetailTransformer($model->good))->toArray(),
             'unit_id' => $model->unit_id,
             'unit' => (new UnitListDetailTransformer($model->unit))->toArray(),
