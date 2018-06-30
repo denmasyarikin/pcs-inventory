@@ -2,34 +2,34 @@
 
 namespace Denmasyarikin\Inventory\Good\Requests;
 
-use Denmasyarikin\Inventory\Good\GoodMedia;
+use Denmasyarikin\Inventory\Good\GoodVariantMedia;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class UpdateGoodMediaRequest extends DetailGoodRequest
+class UpdateGoodVariantMediaRequest extends DetailGoodVariantRequest
 {
     /**
-     * goodMedia.
+     * goodVariantMedia.
      *
-     * @var GoodMedia
+     * @var GoodVariantMedia
      */
-    public $goodMedia;
+    public $goodVariantMedia;
 
     /**
-     * get goodMedia.
+     * get goodVariantMedia.
      *
-     * @return GoodMedia
+     * @return GoodVariantMedia
      */
-    public function getGoodMedia(): ?GoodMedia
+    public function getGoodVariantMedia(): ?GoodVariantMedia
     {
-        if ($this->goodMedia) {
-            return $this->goodMedia;
+        if ($this->goodVariantMedia) {
+            return $this->goodVariantMedia;
         }
 
-        $good = $this->getGood();
+        $variant = $this->getGoodVariant();
         $id = (int) $this->route('media_id');
 
-        if ($this->goodMedia = $good->medias()->find($id)) {
-            return $this->goodMedia;
+        if ($this->goodVariantMedia = $variant->medias()->find($id)) {
+            return $this->goodVariantMedia;
         }
 
         throw new NotFoundHttpException('Good Media Not Found');

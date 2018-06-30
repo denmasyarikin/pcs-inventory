@@ -105,7 +105,7 @@ class GoodController extends Controller
     public function createGood(CreateGoodRequest $request)
     {
         $good = Good::create($request->only([
-            'name', 'description', 'good_category_id',
+            'name', 'description', 'image', 'good_category_id',
         ]));
 
         $good->workspaces()->sync($request->workspace_ids);
@@ -133,7 +133,7 @@ class GoodController extends Controller
         }
 
         $good->update($request->only([
-            'name', 'description', 'good_category_id', 'status',
+            'name', 'description', 'image', 'good_category_id', 'status',
         ]));
 
         $good->workspaces()->sync($request->workspace_ids);

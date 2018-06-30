@@ -4,16 +4,16 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class GoodMedia extends Migration
+class GoodVariantMedia extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('inventory_good_medias', function (Blueprint $table) {
+        Schema::create('inventory_good_variant_medias', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('good_id')->unsigned();
+            $table->integer('good_variant_id')->unsigned();
             $table->enum('type', ['image', 'youtube'])->default('image');
             $table->text('content');
             $table->integer('sequence')->default(0);
@@ -21,7 +21,7 @@ class GoodMedia extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('good_id')->references('id')->on('inventory_goods');
+            $table->foreign('good_variant_id')->references('id')->on('inventory_good_variants');
         });
     }
 
@@ -30,6 +30,6 @@ class GoodMedia extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inventory_good_medias');
+        Schema::dropIfExists('inventory_good_variant_medias');
     }
 }

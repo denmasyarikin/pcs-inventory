@@ -2,7 +2,7 @@
 
 namespace Denmasyarikin\Inventory\Good\Requests;
 
-class CreateGoodMediaRequest extends DetailGoodRequest
+class CreateGoodVariantMediaRequest extends DetailGoodVariantRequest
 {
     /**
      * Get the validation rules that apply to the request.

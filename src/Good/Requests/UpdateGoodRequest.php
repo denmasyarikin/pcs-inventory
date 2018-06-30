@@ -14,6 +14,7 @@ class UpdateGoodRequest extends DetailGoodRequest
         return [
             'name' => 'required|max:50',
             'description' => 'nullable',
+            'image' => 'nullable',
             'status' => 'nullable|in:draft,active,inactive',
             'workspace_ids' => 'required|array|min:1',
             'workspace_ids.*' => 'exists:core_workspaces,id',

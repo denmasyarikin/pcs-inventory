@@ -5,7 +5,7 @@ namespace Denmasyarikin\Inventory\Good;
 use App\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class GoodMedia extends Model
+class GoodVariantMedia extends Model
 {
     use SoftDeletes;
 
@@ -14,13 +14,13 @@ class GoodMedia extends Model
      *
      * @var string
      */
-    protected $table = 'inventory_good_medias';
+    protected $table = 'inventory_good_variant_medias';
 
     /**
      * Get the good record associated with the GoodMedia.
      */
-    public function good()
+    public function goodVariant()
     {
-        return $this->belongsTo(Good::class)->withTrashed();
+        return $this->belongsTo(GoodVariant::class)->withTrashed();
     }
 }

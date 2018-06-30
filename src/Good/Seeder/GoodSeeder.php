@@ -10,7 +10,7 @@ use Denmasyarikin\Inventory\Good\Good;
 use Denmasyarikin\Inventory\Good\GoodCategory;
 use Denmasyarikin\Inventory\Good\GoodOptionItem;
 
-class Seeder
+class GoodSeeder
 {
     /**
      * command.
@@ -288,7 +288,7 @@ class Seeder
 
         foreach ($images as $index => $filePath) {
             $filePaths = explode('.', $filePath);
-            $fileName = $this->generateFilename($path, end($filePaths));
+            $fileName = $this->generateImageFileName($path, end($filePaths));
             $imagePath = $this->imageGoodPath.'/'.$fileName;
             $this->saveImageFile($filePath, base_path('media/'.$imagePath));
             $good->medias()->firstOrCreate([
@@ -426,7 +426,7 @@ class Seeder
 
         if (!is_null($filePath)) {
             $filePaths = explode('.', $filePath);
-            $fileName = $this->generateFilename($path, end($filePaths));
+            $fileName = $this->generateImageFileName($path, end($filePaths));
             $imagePath = $this->imageCategroyPath.'/'.$fileName;
             $this->saveImageFile($filePath, base_path('media/'.$imagePath));
 
@@ -435,20 +435,20 @@ class Seeder
     }
 
     /**
-     * generate image name.
+     * generate image file name.
      *
      * @param string $path
      * @param string $ext
      *
      * @return string
      */
-    protected function generateFilename($path, $ext)
+    protected function generateImageFileName($path, $ext)
     {
         $name = str_random(25).'.'.$ext;
         $fullname = $path.'/'.$name;
 
         if (File::exists($fullname)) {
-            return $this->generateFilename($path, $ext);
+            return $this->generateImageFileName($path, $ext);
         }
 
         return $name;
