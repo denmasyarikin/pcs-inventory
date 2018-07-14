@@ -6,6 +6,7 @@ $router->get('/'.(RE ? 'category' : '0001').'/{id}', ['as' => 'inventory.good.ca
 $router->get('/'.(RE ? 'variant' : '0002').'/{id}', ['as' => 'inventory.good.variant.detail', 'uses' => 'GoodVariantController@getDetail']);
 $router->get('/', ['as' => 'inventory.good.list', 'uses' => 'GoodController@getList']);
 $router->get('/{id}', ['as' => 'inventory.good.detail', 'uses' => 'GoodController@getDetail']);
+$router->get('/{id}/'.(RE ? 'prices' : '0009'), ['as' => 'inventory.good.price.list', 'uses' => 'GoodPriceController@getPriceList']);
 $router->get('/{id}/'.(RE ? 'attribute' : '0004'), ['as' => 'inventory.good.attribute.list', 'uses' => 'GoodAttributeController@getList']);
 $router->get('/{id}/'.(RE ? 'option' : '0005'), ['as' => 'inventory.good.option.list', 'uses' => 'GoodOptionController@getList']);
 $router->get('/{id}/'.(RE ? 'option' : '0005').'/{option_id}/item', ['as' => 'inventory.good.option.item.list', 'uses' => 'GoodOptionItemController@getList']);
