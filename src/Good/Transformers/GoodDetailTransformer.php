@@ -20,6 +20,7 @@ class GoodDetailTransformer extends Detail
         return [
             'id' => $model->id,
             'name' => $model->name,
+            'sort' => $model->sort,
             'description' => $model->description,
             'good_category' => (new GoodCategoryDetailTransformer($model->goodCategory))->toArray(),
             'good_category_id' => $model->good_category_id,

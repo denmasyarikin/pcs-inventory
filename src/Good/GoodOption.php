@@ -29,7 +29,7 @@ class GoodOption extends Model
      */
     public function goodOptionItems()
     {
-        return $this->hasMany(GoodOptionItem::class);
+        return $this->hasMany(GoodOptionItem::class)->orderBy('sort', 'ASC')->orderBy('created_at', 'ASC');
     }
 
     /**

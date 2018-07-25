@@ -10,6 +10,7 @@ use Denmasyarikin\Inventory\Good\Requests\CreateGoodRequest;
 use Denmasyarikin\Inventory\Good\Requests\DetailGoodRequest;
 use Denmasyarikin\Inventory\Good\Requests\UpdateGoodRequest;
 use Denmasyarikin\Inventory\Good\Requests\DeleteGoodRequest;
+use Denmasyarikin\Inventory\Good\Requests\UpdateSortingGoodRequest;
 use Denmasyarikin\Inventory\Good\Transformers\GoodListTransformer;
 use Denmasyarikin\Inventory\Good\Transformers\GoodDetailTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -42,7 +43,7 @@ class GoodController extends Controller
      */
     protected function getGoodList(Request $request, $status = null)
     {
-        $goods = Good::with('variants')->orderBy('name', 'ASC');
+        $goods = Good::with('variants')->orderBy('sort', 'ASC')->orderBy('created_at', 'ASC');
 
         if ($request->has('key')) {
             $goods->where('name', 'like', "%{$request->key}%");
@@ -145,7 +146,7 @@ class GoodController extends Controller
     }
 
     /**
-     * update good.
+     * delete good.
      *
      * @param DeleteGoodRequest $request
      *
@@ -158,5 +159,21 @@ class GoodController extends Controller
         $good->delete();
 
         return new JsonResponse(['message' => 'Good has been deleted']);
+    }
+
+    /**
+     * update sorting.
+     *
+     * @param DeleteGoodRequest $request
+     *
+     * @return json
+     */
+    public function updateSorting(UpdateSortingGoodRequest $request)
+    {
+        foreach ($request->data as $sort) {
+            Good::find($sort['id'])->update(['sort' => $sort['sort']]);
+        }
+
+        return new JsonResponse(['message' => 'Good has been sorted']);
     }
 }

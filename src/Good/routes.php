@@ -1,6 +1,6 @@
 <?php
 
-
+$router->put('/'.(RE ? 'sorting' : '0010'), ['as' => 'inventory.good.sorting', 'uses' => 'GoodController@updateSorting']);
 $router->get('/'.(RE ? 'category' : '0001'), ['as' => 'inventory.good.category.list', 'uses' => 'GoodCategoryController@getList']);
 $router->get('/'.(RE ? 'category' : '0001').'/{id}', ['as' => 'inventory.good.category.detail', 'uses' => 'GoodCategoryController@getDetail']);
 $router->get('/'.(RE ? 'variant' : '0002').'/{id}', ['as' => 'inventory.good.variant.detail', 'uses' => 'GoodVariantController@getDetail']);
@@ -56,6 +56,5 @@ $router->group(['middleware' => 'manage:inventory,good,write'], function ($route
             $router->put('/{media_id}/'.(RE ? 'primary' : '0008'), ['as' => 'inventory.good.variant.media.update_primary', 'uses' => 'GoodVariantMediaController@updateMediaPrimary']);
             $router->delete('/{media_id}', ['as' => 'inventory.good.variant.media.delete', 'uses' => 'GoodVariantMediaController@deleteMedia']);
         });
-
     });
 });
