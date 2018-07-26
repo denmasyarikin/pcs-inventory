@@ -20,6 +20,7 @@ class GoodCategoryDetailTransformer extends Detail
         return [
             'id' => $model->id,
             'name' => $model->name,
+            'sort' => $model->sort,
             'image' => $model->image,
             'parent_id' => $model->parent_id ? (int) $model->parent_id : null,
             'workspace_ids' => $model->workspaces->pluck('id'),

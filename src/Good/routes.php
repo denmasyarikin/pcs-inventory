@@ -15,9 +15,10 @@ $router->get('/{id}/variant/{variant_id}/'.(RE ? 'media' : '0007'), ['as' => 'in
 
 $router->group(['middleware' => 'manage:inventory,good,write'], function ($router) {
     $router->put((RE ? 'sorting' : '0010'), ['as' => 'inventory.good.sorting', 'uses' => 'GoodController@updateSorting']);
-    $router->put('variant/'.(RE ? 'sorting' : '0011'), ['as' => 'inventory.good.variant.sorting', 'uses' => 'GoodVariantController@updateSorting']);
-    $router->put('option/'.(RE ? 'sorting' : '0012'), ['as' => 'inventory.good.option.sorting', 'uses' => 'GoodOptionController@updateSorting']);
-    $router->put('option/item/'.(RE ? 'sorting' : '0013'), ['as' => 'inventory.good.option.item.sorting', 'uses' => 'GoodOptionItemController@updateSorting']);
+    $router->put('category/'.(RE ? 'sorting' : '0011'), ['as' => 'inventory.good.category.sorting', 'uses' => 'GoodCategoryController@updateSorting']);
+    $router->put('variant/'.(RE ? 'sorting' : '0012'), ['as' => 'inventory.good.variant.sorting', 'uses' => 'GoodVariantController@updateSorting']);
+    $router->put('option/'.(RE ? 'sorting' : '0013'), ['as' => 'inventory.good.option.sorting', 'uses' => 'GoodOptionController@updateSorting']);
+    $router->put('option/item/'.(RE ? 'sorting' : '0014'), ['as' => 'inventory.good.option.item.sorting', 'uses' => 'GoodOptionItemController@updateSorting']);
 
     $router->post((RE ? 'category' : '0001'), ['as' => 'inventory.good.category.create', 'uses' => 'GoodCategoryController@createCategory']);
     $router->put((RE ? 'category' : '0001').'/{id}', ['as' => 'inventory.good.category.update', 'uses' => 'GoodCategoryController@updateCategory']);
