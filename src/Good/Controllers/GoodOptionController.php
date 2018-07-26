@@ -4,10 +4,12 @@ namespace Denmasyarikin\Inventory\Good\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Denmasyarikin\Inventory\Good\GoodOption;
 use Denmasyarikin\Inventory\Good\Requests\DetailGoodRequest;
 use Denmasyarikin\Inventory\Good\Requests\CreateGoodOptionRequest;
 use Denmasyarikin\Inventory\Good\Requests\UpdateGoodOptionRequest;
 use Denmasyarikin\Inventory\Good\Requests\DeleteGoodOptionRequest;
+use Denmasyarikin\Inventory\Good\Requests\UpdateSortingGoodOptionRequest;
 use Denmasyarikin\Inventory\Good\Transformers\GoodOptionListTransformer;
 use Denmasyarikin\Inventory\Good\Transformers\GoodOptionDetailTransformer;
 
@@ -82,5 +84,21 @@ class GoodOptionController extends Controller
         $option->delete();
 
         return new JsonResponse(['messaage' => 'Good option has been deleted']);
+    }
+
+    /**
+     * update sorting.
+     *
+     * @param DeleteGoodRequest $request
+     *
+     * @return json
+     */
+    public function updateSorting(UpdateSortingGoodOptionRequest $request)
+    {
+        foreach ($request->data as $sort) {
+            GoodOption::find($sort['id'])->update(['sort' => $sort['sort']]);
+        }
+
+        return new JsonResponse(['message' => 'Good option has been sorted']);
     }
 }
