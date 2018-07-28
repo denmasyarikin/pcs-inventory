@@ -22,7 +22,7 @@ class GoodCategory extends Model
      */
     public function goods()
     {
-        return $this->hasMany(Good::class);
+        return $this->hasMany(Good::class)->orderBy('sort', 'ASC')->orderBy('created_at', 'ASC');
     }
 
     /**
@@ -38,7 +38,7 @@ class GoodCategory extends Model
      */
     public function children()
     {
-        return $this->hasMany(static::class, 'parent_id');
+        return $this->hasMany(static::class, 'parent_id')->orderBy('sort', 'ASC')->orderBy('created_at', 'ASC');
     }
 
     /**

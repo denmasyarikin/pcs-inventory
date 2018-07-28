@@ -11,6 +11,7 @@ use Denmasyarikin\Inventory\Good\Requests\DetailVariantRequest;
 use Denmasyarikin\Inventory\Good\Requests\CreateGoodVariantRequest;
 use Denmasyarikin\Inventory\Good\Requests\UpdateGoodVariantRequest;
 use Denmasyarikin\Inventory\Good\Requests\DeleteGoodVariantRequest;
+use Denmasyarikin\Inventory\Good\Requests\UpdateSortingGoodVariantRequest;
 use Denmasyarikin\Inventory\Good\Transformers\GoodVariantListTransformer;
 use Denmasyarikin\Inventory\Good\Transformers\GoodVariantDetailTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -137,5 +138,21 @@ class GoodVariantController extends Controller
                 throw new BadRequestHttpException('Good Variant already exists');
             }
         }
+    }
+
+    /**
+     * update sorting.
+     *
+     * @param DeleteGoodRequest $request
+     *
+     * @return json
+     */
+    public function updateSorting(UpdateSortingGoodVariantRequest $request)
+    {
+        foreach ($request->data as $sort) {
+            GoodVariant::find($sort['id'])->update(['sort' => $sort['sort']]);
+        }
+
+        return new JsonResponse(['message' => 'Good variants has been sorted']);
     }
 }

@@ -14,6 +14,7 @@ class GoodOption extends Migration
         Schema::create('inventory_good_options', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);
+            $table->integer('sort')->default(0);
             $table->integer('good_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();

@@ -25,6 +25,7 @@ class GoodOptionItemDetailTransformer extends Detail
                 'name' => $goodOption->name,
             ],
             'name' => $model->name,
+            'sort' => $model->sort,
             'created_at' => $model->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $model->updated_at->format('Y-m-d H:i:s'),
         ];

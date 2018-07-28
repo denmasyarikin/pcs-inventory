@@ -10,6 +10,7 @@ use Denmasyarikin\Inventory\Good\Requests\DetailGoodCategoryRequest;
 use Denmasyarikin\Inventory\Good\Requests\CreateGoodCategoryRequest;
 use Denmasyarikin\Inventory\Good\Requests\UpdateGoodCategoryRequest;
 use Denmasyarikin\Inventory\Good\Requests\DeleteGoodCategoryRequest;
+use Denmasyarikin\Inventory\Good\Requests\UpdateSortingGoodCategoryRequest;
 use Denmasyarikin\Inventory\Good\Transformers\GoodCategoryListTransformer;
 use Denmasyarikin\Inventory\Good\Transformers\GoodCategoryDetailTransformer;
 
@@ -56,7 +57,7 @@ class GoodCategoryController extends Controller
      */
     protected function getGoodCategoryList(Request $request)
     {
-        $categories = GoodCategory::orderBy('name', 'ASC');
+        $categories = GoodCategory::orderBy('sort', 'ASC')->orderBy('created_at', 'ASC');
 
         if ($request->has('parent_id')) {
             $categories->whereParentId($request->parent_id);
@@ -149,5 +150,21 @@ class GoodCategoryController extends Controller
         $goodCategory->delete();
 
         return new JsonResponse(['message' => 'Good category has been deleted']);
+    }
+
+    /**
+     * update sorting.
+     *
+     * @param UpdateSortingGoodCategoryRequest $request
+     *
+     * @return json
+     */
+    public function updateSorting(UpdateSortingGoodCategoryRequest $request)
+    {
+        foreach ($request->data as $sort) {
+            GoodCategory::find($sort['id'])->update(['sort' => $sort['sort']]);
+        }
+
+        return new JsonResponse(['message' => 'Good category has been sorted']);
     }
 }

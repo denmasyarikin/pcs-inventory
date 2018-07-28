@@ -14,6 +14,7 @@ class GoodVariant extends Migration
         Schema::create('inventory_good_variants', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50)->nullable()->default(null);
+            $table->integer('sort')->default(0);
             $table->integer('good_id')->unsigned();
             $table->integer('unit_id')->unsigned();
             $table->boolean('tracked')->default(false);

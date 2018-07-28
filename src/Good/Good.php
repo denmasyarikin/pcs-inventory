@@ -38,7 +38,7 @@ class Good extends Model
      */
     public function options()
     {
-        return $this->hasMany(GoodOption::class);
+        return $this->hasMany(GoodOption::class)->orderBy('sort', 'ASC')->orderBy('created_at', 'ASC');
     }
 
     /**
@@ -46,7 +46,7 @@ class Good extends Model
      */
     public function variants()
     {
-        return $this->hasMany(GoodVariant::class);
+        return $this->hasMany(GoodVariant::class)->orderBy('sort', 'ASC')->orderBy('created_at', 'ASC');
     }
 
     /**
