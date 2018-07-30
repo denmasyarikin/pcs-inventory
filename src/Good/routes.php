@@ -46,7 +46,7 @@ $router->group(['middleware' => 'manage:inventory,good,write'], function ($route
 
     $router->group(['prefix' => '/{id}/'.(RE ? 'variant' : '0002')], function ($router) {
         $router->post('/', ['as' => 'inventory.good.variant.create', 'uses' => 'GoodVariantController@createVariant']);
-        $router->put('/', ['as' => 'inventory.good.variant.create', 'uses' => 'GoodVariantController@createVariant']);
+        $router->put('/{variant_id}', ['as' => 'inventory.good.variant.update', 'uses' => 'GoodVariantController@updateVariant']);
         $router->delete('/{variant_id}', ['as' => 'inventory.good.variant.delete', 'uses' => 'GoodVariantController@deleteVariant']);
         
         $router->group(['prefix' => '/{variant_id}/'.(RE ? 'price' : '0003')], function ($router) {
