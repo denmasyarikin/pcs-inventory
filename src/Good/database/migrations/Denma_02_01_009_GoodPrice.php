@@ -15,11 +15,11 @@ class GoodPrice extends Migration
             $table->increments('id');
             $table->integer('good_variant_id')->unsigned();
             $table->integer('chanel_id')->nullable()->default(null)->unsigned()->comment('where chanel_id is null that mean is base price');
-            $table->bigInteger('price');
+            $table->float('price');
             $table->boolean('current')->default(true);
             $table->integer('previous_id')->unsigned()->nullable()->default(null);
             $table->enum('change_type', ['up', 'down'])->nullable()->default(null);
-            $table->bigInteger('difference');
+            $table->float('difference');
             $table->timestamps();
             $table->softDeletes();
 

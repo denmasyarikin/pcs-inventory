@@ -13,6 +13,7 @@ use Denmasyarikin\Inventory\Good\Requests\CreateGoodPriceRequest;
 use Denmasyarikin\Inventory\Good\Requests\UpdateGoodPriceRequest;
 use Denmasyarikin\Inventory\Good\Requests\DeleteGoodPriceRequest;
 use Denmasyarikin\Inventory\Good\Transformers\GoodPriceListTransformer;
+use Denmasyarikin\Inventory\Good\Transformers\GoodListDetailTransformer;
 use Denmasyarikin\Inventory\Good\Transformers\GoodPriceDetailTransformer;
 use Denmasyarikin\Inventory\Good\Transformers\GoodPriceVaraintListTransformer;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -47,6 +48,7 @@ class GoodPriceController extends Controller
         $variants = $good->variants()->whereEnabled(true)->get();
 
         return new JsonResponse([
+            'good' => (new GoodListDetailTransformer($good))->toArray(),
             'data' => (new GoodPriceVaraintListTransformer($variants))->toArray(),
         ]);
     }

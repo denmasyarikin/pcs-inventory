@@ -36,7 +36,7 @@ class GoodCategoryController extends Controller
                 $data['detail'] = (new GoodCategoryDetailTransformer($category))->toArray();
             }
 
-            if ($category->parent_id) {
+            if ($category and $category->parent_id) {
                 $category = GoodCategory::find((int) $category->parent_id);
 
                 if ($category) {
