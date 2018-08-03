@@ -16,6 +16,7 @@ class Good extends Migration
             $table->string('name', 100);
             $table->integer('sort')->default(0);
             $table->text('description')->nullable()->default(null);
+            $table->text('image')->nullable()->default(null);
             $table->integer('good_category_id')->nullable()->default(null)->unsigned();
             $table->enum('status', ['draft', 'active', 'inactive'])->default('draft');
             $table->timestamps();
